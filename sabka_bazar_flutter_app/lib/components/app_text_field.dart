@@ -17,7 +17,7 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: TextFormField(
         obscureText: isSecureText,
         cursorColor: Colors.black,

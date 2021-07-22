@@ -5,18 +5,18 @@ import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/components/unfilled_app_button.dart';
 import 'package:sabka_bazar_flutter_app/screens/home_screen.dart';
-import 'package:sabka_bazar_flutter_app/screens/signup_screen.dart';
+import 'package:sabka_bazar_flutter_app/screens/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routName = "/login";
+class SignupScreen extends StatefulWidget {
+  static const String routName = "/signup";
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: (MediaQuery.of(context).size.height) / 8),
+            SizedBox(height: 40),
             Text(
-              'Login',
+              'Signup',
               style: TextStyle(
                 // fontFamily: 'Pacifico',
                 fontSize: 30.0,
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
-                'Get access to your Orders, Wishlist and Recommendations.',
+                'We do not share your personal details with anyone.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     // fontFamily: 'SourceSansPro',
@@ -51,7 +51,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 20),
+            AppTextField(
+              labelText: "First Name",
+              hintText: "Enter your First Name",
+              keyboardType: TextInputType.name,
+            ),
+            AppTextField(
+              labelText: "Last Name",
+              hintText: "Enter your Last Name",
+              keyboardType: TextInputType.name,
+            ),
             AppTextField(
               labelText: "Email",
               hintText: "Enter your Email",
@@ -62,10 +72,15 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: "Enter your password",
               isSecureText: true,
             ),
+            AppTextField(
+              labelText: "Confirm Password",
+              hintText: "Enter your Confirm password",
+              isSecureText: true,
+            ),
             SizedBox(height: 30),
             AppButton(
-              buttonText: "Login",
-              onPressed: () => _loginBtnTapped(),
+              buttonText: "Signup",
+              onPressed: () => _signupBtnTapped(),
             ),
             SizedBox(height: 30),
             Text(
@@ -84,16 +99,17 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Do not have an account?',
+                  'Already have an account?',
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(width: 20),
                 UnfilledAppButton(
-                  buttonText: 'Signup',
-                  onPressed: () => _signupBtnTapped(),
+                  buttonText: 'Login',
+                  onPressed: () => _loginBtnTapped(),
                 ),
               ],
             ),
+            SizedBox(height: 30),
           ],
         ),
       ),
@@ -106,10 +122,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _loginBtnTapped() {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    Navigator.of(context).pushReplacementNamed(LoginScreen.routName);
   }
 
   void _signupBtnTapped() {
-    Navigator.of(context).pushReplacementNamed(SignupScreen.routName);
+    Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
   }
 }
