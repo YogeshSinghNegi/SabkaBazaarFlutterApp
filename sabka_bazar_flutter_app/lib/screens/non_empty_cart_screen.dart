@@ -24,7 +24,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       "price": 87,
       "stock": 50,
       "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3"
+      "sku": "fnw-kiwi-3",
+      "quantity": 1,
     },
     {
       "id": "5b6c6a7f01a7c38429530883",
@@ -35,7 +36,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       "price": 87,
       "stock": 50,
       "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3"
+      "sku": "fnw-kiwi-3",
+      "quantity": 3,
     },
     {
       "id": "5b6c6a7f01a7c38429530883",
@@ -46,7 +48,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       "price": 87,
       "stock": 50,
       "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3"
+      "sku": "fnw-kiwi-3",
+      "quantity": 2,
     }
   ];
 
@@ -94,107 +97,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Container(
-                      // height: 90,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
-                            child: Image.asset(
-                              _cartList[0]["imageURL"].toString(),
-                              height: 100,
-                            ),
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'You won\'t find it cheaper anywhere',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 30,
-                                        width: 40,
-                                        child: AppButton(
-                                          buttonImage: Icons.remove,
-                                          isImageOnly: true,
-                                          borderRadius: 5,
-                                          onPressed: () => {},
-                                        ),
-                                      ),
-                                      SizedBox(width: 15),
-                                      Text(
-                                        _cartList.length.toString(),
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Container(
-                                        height: 30,
-                                        width: 40,
-                                        child: AppButton(
-                                          buttonImage: Icons.add,
-                                          isImageOnly: true,
-                                          borderRadius: 5,
-                                          onPressed: () => {},
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        'X',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        'Rs.' +
-                                            _cartList[0]["price"].toString(),
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          'Rs.' +
-                                              _cartList[0]["price"].toString(),
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    _getItemListWidget(),
                     SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -265,6 +168,111 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
         ],
       ),
     );
+  }
+
+  Column _getItemListWidget() {
+    return Column(
+        children: _cartList
+            .map((element) => Container(
+                  // height: 90,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 20, 0, 20),
+                        child: Image.asset(
+                          _cartList[0]["imageURL"].toString(),
+                          height: 100,
+                        ),
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'You won\'t find it cheaper anywhere',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 30,
+                                    width: 40,
+                                    child: AppButton(
+                                      buttonImage: Icons.remove,
+                                      isImageOnly: true,
+                                      borderRadius: 5,
+                                      onPressed: () => {},
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    _cartList.length.toString(),
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Container(
+                                    height: 30,
+                                    width: 40,
+                                    child: AppButton(
+                                      buttonImage: Icons.add,
+                                      isImageOnly: true,
+                                      borderRadius: 5,
+                                      onPressed: () => {},
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'X',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Rs.' + _cartList[0]["price"].toString(),
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      'Rs.' + _cartList[0]["price"].toString(),
+                                      textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ))
+            .toList());
   }
 
   String _getNumberOfItemCart() {
