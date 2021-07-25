@@ -14,6 +14,8 @@ class EmptyCartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: Text('My Cart'),
+        leadingWidth: 0,
+        leading: SizedBox(),
         centerTitle: false,
         actions: [
           IconButton(

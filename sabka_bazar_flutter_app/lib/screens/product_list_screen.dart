@@ -4,6 +4,7 @@ import 'package:sabka_bazar_flutter_app/components/app_divider.dart';
 import 'package:sabka_bazar_flutter_app/components/category_title_widget.dart';
 import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/screens/empty_cart_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   static const String routName = "/product_list";
@@ -378,7 +379,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                           child: AppButton(
                             buttonText: "Buy Now @ MRP Rs." +
                                 _productModel[index]["price"].toString(),
-                            onPressed: () => {},
+                            onPressed: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EmptyCartScreen(),
+                                  fullscreenDialog: true,
+                                ),
+                              )
+                            },
                           ),
                         ),
                       ],
