@@ -57,7 +57,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(isShowCrossButton: true),
       body: Column(
         children: [
           Flexible(

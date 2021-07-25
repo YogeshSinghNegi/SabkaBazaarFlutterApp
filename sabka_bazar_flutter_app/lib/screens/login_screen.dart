@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(isHideCartButton: true),
       body: Column(
         children: [
           Flexible(
