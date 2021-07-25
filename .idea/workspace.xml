@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16a7260-6def-4bb3-8c48-fb7880f034fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/my_app_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/my_app_bar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/empty_cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/empty_cart_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/non_empty_cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/non_empty_cart_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/signup_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/Users/aisrasto/.android/avd/Galaxy_Nexus_API_29.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -38,7 +43,9 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -51,6 +58,10 @@
   </component>
   <component name="RunManager">
     <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter" editBeforeRun="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" editBeforeRun="true">
+      <option name="filePath" value="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/main.dart" />
       <method v="2" />
     </configuration>
   </component>
@@ -70,26 +81,38 @@
       <screen x="52" y="23" width="1740" height="1097" />
     </state>
     <state x="563" y="437" key="#Scopes/52.23.1740.1097@52.23.1740.1097" timestamp="1627189924196" />
+    <state x="366" y="380" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1627204806437">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state x="366" y="380" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/55.23.1737.1097@55.23.1737.1097" timestamp="1627204806437" />
+    <state x="639" y="527" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1627204802257">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state x="639" y="527" key="#com.intellij.ide.util.TreeFileChooserDialog/55.23.1737.1097@55.23.1737.1097" timestamp="1627204802257" />
+    <state x="713" y="451" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1627201818047">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state x="713" y="451" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/55.23.1737.1097@55.23.1737.1097" timestamp="1627201818047" />
+    <state width="1259" height="296" key="GridCell.Tab.0.bottom" timestamp="1627206604653">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state width="1259" height="296" key="GridCell.Tab.0.bottom/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604653" />
+    <state width="1259" height="296" key="GridCell.Tab.0.center" timestamp="1627206604652">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state width="1259" height="296" key="GridCell.Tab.0.center/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604652" />
+    <state width="1259" height="296" key="GridCell.Tab.0.left" timestamp="1627206604652">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state width="1259" height="296" key="GridCell.Tab.0.left/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604652" />
+    <state width="1259" height="296" key="GridCell.Tab.0.right" timestamp="1627206604653">
+      <screen x="55" y="23" width="1737" height="1097" />
+    </state>
+    <state width="1259" height="296" key="GridCell.Tab.0.right/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604653" />
     <state x="265" y="210" key="SettingsEditor" timestamp="1627193579317">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
     <state x="265" y="210" key="SettingsEditor/54.23.1738.1097@54.23.1738.1097" timestamp="1627063781677" />
     <state x="265" y="210" key="SettingsEditor/55.23.1737.1097@55.23.1737.1097" timestamp="1627193579317" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart</url>
-          <line>63</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart</url>
-          <line>182</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

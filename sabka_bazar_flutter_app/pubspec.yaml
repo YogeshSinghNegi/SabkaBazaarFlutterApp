@@ -30,8 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.22.0
   page_indicator: ^0.4.1
-  rxdart: ^0.23.1
-  http: ^0.12.0+4
+  rxdart: ^0.27.1
+  http: ^0.13.3
   flutter_bloc: ^7.0.0
 
 dev_dependencies:

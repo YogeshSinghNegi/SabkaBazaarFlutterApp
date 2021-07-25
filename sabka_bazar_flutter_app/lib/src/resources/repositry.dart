@@ -7,9 +7,9 @@ import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 class Repository {
   final apiProvider = ApiProvider();
 
-  Future<OfferModel> fetchAllOffers() => apiProvider.fetchOfferList();
-  Future<CategoryModel> fetchAllCategory() => apiProvider.fetchCategoryList();
-  Future<ProductModel> fetchAllProducts() => apiProvider.fetchProductList();
+  Future<List<OfferModel>> fetchAllOffers() => apiProvider.fetchOfferList();
+  Future<List<CategoryModel>> fetchAllCategory() => apiProvider.fetchCategoryList();
+  Future<List<ProductModel>> fetchAllProducts() => apiProvider.fetchProductList();
 
   //Future<TrailerModel> fetchTrailers(int movieId) => moviesApiProvider.fetchTrailer(movieId);
 }

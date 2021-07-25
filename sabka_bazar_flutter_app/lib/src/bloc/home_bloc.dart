@@ -7,26 +7,27 @@ import 'package:sabka_bazar_flutter_app/src/resources/repositry.dart';
 
 class HomeBloc {
   final _repository = Repository();
-  final _offerFetcher = PublishSubject<OfferModel>();
-  final _categoryFetcher = PublishSubject<CategoryModel>();
-  final _productFetcher = PublishSubject<ProductModel>();
+  final _offerFetcher = PublishSubject<List<OfferModel>>();
+  final _categoryFetcher = PublishSubject<List<CategoryModel>>();
+  final _productFetcher = PublishSubject<List<ProductModel>>();
 
-  Stream<OfferModel> get allOffers => _offerFetcher.stream;
-  Stream<CategoryModel> get allCategory => _categoryFetcher.stream;
-  Stream<ProductModel> get allProducts => _productFetcher.stream;
+
+  Stream<List<OfferModel>> get allOffers => _offerFetcher.stream;
+  Stream<List<CategoryModel>> get allCategory => _categoryFetcher.stream;
+  Stream<List<ProductModel>> get allProducts => _productFetcher.stream;
 
   fetchAllOffers() async {
-   OfferModel offerModel  = await _repository.fetchAllOffers();
-    _offerFetcher.sink.add(offerModel);
+    List<OfferModel> offerModelList  = await _repository.fetchAllOffers();
+    _offerFetcher.sink.add(offerModelList);
   }
 
   fetchAllCategories() async {
-    CategoryModel categoryModel  = await _repository.fetchAllCategory();
+    List<CategoryModel> categoryModel  = await _repository.fetchAllCategory();
     _categoryFetcher.sink.add(categoryModel);
   }
 
   fetchAllProducts() async {
-    ProductModel productModel  = await _repository.fetchAllProducts();
+    List<ProductModel> productModel  = await _repository.fetchAllProducts();
     _productFetcher.sink.add(productModel);
   }
 
