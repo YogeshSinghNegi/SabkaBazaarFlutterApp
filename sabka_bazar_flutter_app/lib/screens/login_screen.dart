@@ -4,6 +4,7 @@ import 'package:sabka_bazar_flutter_app/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/components/unfilled_app_button.dart';
+import 'package:sabka_bazar_flutter_app/extensions/string_extension.dart';
 import 'package:sabka_bazar_flutter_app/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/screens/signup_screen.dart';
 
@@ -17,6 +18,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _emailController.text = '';
+    _passwordController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +72,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: "Email",
                       hintText: "Enter your Email",
                       keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
                     ),
                     AppTextField(
                       labelText: "Password",
                       hintText: "Enter your password",
                       isSecureText: true,
+                      controller: _passwordController,
                     ),
                     SizedBox(height: 30),
                     AppButton(
@@ -109,8 +123,16 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  bool _isLoginValid() {
+    var isValid = false;
+    if (_emailController.text.trim().isValidEmail()) isValid = true;
+    if (_passwordController.text.trim().length > 5) isValid = true;
+    return isValid;
+  }
+
   void _loginBtnTapped() {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    if (_isLoginValid())
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
   }
 
   void _signupBtnTapped() {
