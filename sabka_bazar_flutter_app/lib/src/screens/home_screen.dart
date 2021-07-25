@@ -9,6 +9,7 @@ import 'package:sabka_bazar_flutter_app/screens/product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = "/home";
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
