@@ -154,10 +154,42 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                   height: 60,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: AppButton(
-                      buttonText: 'Start Shopping',
+                    child: TextButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.zero),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                        ),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.pink.shade800),
+                      ),
                       onPressed: () => {},
-                      borderRadius: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Proceed to Checkout',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                            Expanded(child: Container()),
+                            Text(
+                              'Rs.' + _cartList[0]["price"].toString(),
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Icon(Icons.arrow_forward_ios, size: 15),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

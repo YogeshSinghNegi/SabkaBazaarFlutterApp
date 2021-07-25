@@ -22,85 +22,89 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MyAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: (MediaQuery.of(context).size.height) / 8),
-            Text(
-              'Login',
-              style: TextStyle(
-                // fontFamily: 'Pacifico',
-                fontSize: 30.0,
-                // color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Text(
-                'Get access to your Orders, Wishlist and Recommendations.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    // fontFamily: 'SourceSansPro',
-                    // fontWeight: FontWeight.bold,
-                    // fontSize: 20.0,
-                    // letterSpacing: 2.5,
-                    // color: Colors.teal[100],
-                    ),
-              ),
-            ),
-            SizedBox(height: 30),
-            AppTextField(
-              labelText: "Email",
-              hintText: "Enter your Email",
-              keyboardType: TextInputType.emailAddress,
-            ),
-            AppTextField(
-              labelText: "Password",
-              hintText: "Enter your password",
-              isSecureText: true,
-            ),
-            SizedBox(height: 30),
-            AppButton(
-              buttonText: "Login",
-              onPressed: () => _loginBtnTapped(),
-            ),
-            SizedBox(height: 30),
-            Text(
-              'OR',
-              style: TextStyle(
-                // fontFamily: 'SourceSansPro',
-                // fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-                // letterSpacing: 2.5,
-                // color: Colors.teal[100],
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+        children: [
+          Flexible(
+            child: ListView(
               children: [
-                Text(
-                  'Do not have an account?',
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(width: 20),
-                UnfilledAppButton(
-                  buttonText: 'Signup',
-                  onPressed: () => _signupBtnTapped(),
-                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: (MediaQuery.of(context).size.height) / 8),
+                    Text(
+                      'Login',
+                      style: TextStyle(
+                        // fontFamily: 'Pacifico',
+                        fontSize: 30.0,
+                        // color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Text(
+                        'Get access to your Orders, Wishlist and Recommendations.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            // fontFamily: 'SourceSansPro',
+                            // fontWeight: FontWeight.bold,
+                            // fontSize: 20.0,
+                            // letterSpacing: 2.5,
+                            // color: Colors.teal[100],
+                            ),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    AppTextField(
+                      labelText: "Email",
+                      hintText: "Enter your Email",
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    AppTextField(
+                      labelText: "Password",
+                      hintText: "Enter your password",
+                      isSecureText: true,
+                    ),
+                    SizedBox(height: 30),
+                    AppButton(
+                      buttonText: "Login",
+                      onPressed: () => _loginBtnTapped(),
+                    ),
+                    SizedBox(height: 30),
+                    Text(
+                      'OR',
+                      style: TextStyle(
+                        // fontFamily: 'SourceSansPro',
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                        // letterSpacing: 2.5,
+                        // color: Colors.teal[100],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Do not have an account?',
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(width: 20),
+                        UnfilledAppButton(
+                          buttonText: 'Signup',
+                          onPressed: () => _signupBtnTapped(),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.transparent,
-        child: CopyrightWidget(),
-        elevation: 0,
+          ),
+          CopyrightWidget(),
+        ],
       ),
     );
   }
