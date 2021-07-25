@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/components/app_divider.dart';
-import 'package:sabka_bazar_flutter_app/components/category_title_widget.dart';
-import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
-import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
+import 'package:sabka_bazar_flutter_app/src/components/category_title_widget.dart';
+import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
+import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 
 class ProductListScreen extends StatefulWidget {
   static const String routName = "/product_list";

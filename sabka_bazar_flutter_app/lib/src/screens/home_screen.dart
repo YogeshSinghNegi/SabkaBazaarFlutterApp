@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:page_indicator/page_indicator.dart';
-import 'package:sabka_bazar_flutter_app/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/components/app_divider.dart';
-import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
-import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
-import 'package:sabka_bazar_flutter_app/screens/product_list_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/home_bloc.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
+import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
+import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/product_list_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const String routName = "/home";
 
   const HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
+  // @override
+  // _HomeScreenState createState() => _HomeScreenState();
+  State<StatefulWidget> createState() {
+    return _HomeScreenState();
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -117,18 +122,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = PageController();
-    _categoryModel = _categoryModel
-        .where(
-          (item) => item["enabled"].toString() == 'true',
-        )
-        .toList();
+    bloc.fetchAllOffers();
+    bloc.fetchAllCategories();
+    // _categoryModel = _categoryModel
+    //     .where(
+    //       (item) => item["enabled"].toString() == 'true',
+    //     )
+    //     .toList();
   }
 
   @override
   void dispose() {
+    bloc.dispose();
     _controller.dispose();
     super.dispose();
   }

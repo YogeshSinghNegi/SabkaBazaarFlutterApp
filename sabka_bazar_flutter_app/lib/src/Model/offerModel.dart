@@ -1,18 +1,18 @@
-class offerModel {
+class OfferModel {
   String? bannerImageUrl;
   String? bannerImageAlt;
   String? isActive;
   int? order;
   String? id;
 
-  offerModel(
+  OfferModel(
       {this.bannerImageUrl,
       this.bannerImageAlt,
       this.isActive,
       this.order,
       this.id});
 
-  offerModel.fromJson(Map<String, dynamic> json) {
+  OfferModel.fromJson(Map<String, dynamic> json) {
     bannerImageUrl = json['bannerImageUrl'];
     bannerImageAlt = json['bannerImageAlt'];
     isActive = json['isActive'];

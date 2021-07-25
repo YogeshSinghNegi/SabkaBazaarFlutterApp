@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/screens/empty_cart_screen.dart';
-import 'package:sabka_bazar_flutter_app/screens/non_empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/non_empty_cart_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/splash_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/login_screen.dart';

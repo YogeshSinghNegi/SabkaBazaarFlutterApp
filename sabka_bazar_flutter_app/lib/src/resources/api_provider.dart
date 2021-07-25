@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' show Client, Response;
-import 'package:sabka_bazar_flutter_app/Model/categoryModel.dart';
-import 'package:sabka_bazar_flutter_app/Model/offerModel.dart';
-import 'package:sabka_bazar_flutter_app/Model/productModel.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/categoryModel.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 
 class ApiProvider {
   Client client = Client();
   final _apiKey = 'api-key';
   final _baseUrl = "https://sabaka-bazzar.azurewebsites.net/sabakabazzar/";
 
-  Future<offerModel> fetchOfferList() async {
+  Future<OfferModel> fetchOfferList() async {
     Response response;
     if(_apiKey != 'api-key') {
       response = await client.get("$_baseUrl/banners");
@@ -19,14 +19,14 @@ class ApiProvider {
     }
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
-      return offerModel().fromJson(json.decode(response.body));
+      return OfferModel.fromJson(json.decode(response.body));
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');
     }
   }
 
-  Future<categoryModel> fetchCatrgoryList() async {
+  Future<CategoryModel> fetchCategoryList() async {
     Response response;
     if(_apiKey != 'api-key') {
       response = await client.get("$_baseUrl/categories");
@@ -35,13 +35,13 @@ class ApiProvider {
     }
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
-      return offerModel().fromJson(json.decode(response.body));
+      return CategoryModel.fromJson(json.decode(response.body));
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');
     }
   }
-  Future<productModel> fetchProductList() async {
+  Future<ProductModel> fetchProductList() async {
     Response response;
     if(_apiKey != 'api-key') {
       response = await client.get("$_baseUrl/products");
@@ -50,7 +50,7 @@ class ApiProvider {
     }
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
-      return offerModel().fromJson(json.decode(response.body));
+      return ProductModel.fromJson(json.decode(response.body));
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');

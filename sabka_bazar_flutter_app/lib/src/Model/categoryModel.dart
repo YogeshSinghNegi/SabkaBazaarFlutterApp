@@ -1,4 +1,4 @@
-class categoryModel {
+class CategoryModel {
   String? id;
   String? name;
   String? key;
@@ -7,7 +7,7 @@ class categoryModel {
   int? order;
   String? imageUrl;
 
-  categoryModel(
+  CategoryModel(
       {this.name,
       this.id,
       this.key,
@@ -16,7 +16,7 @@ class categoryModel {
       this.order,
       this.imageUrl});
 
-  categoryModel.fromJson(Map<String, dynamic> json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     key = json['key'];

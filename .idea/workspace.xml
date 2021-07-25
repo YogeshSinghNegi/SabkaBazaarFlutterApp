@@ -5,14 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16a7260-6def-4bb3-8c48-fb7880f034fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/assets/images/lowest_price.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/shadow_container.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/empty_cart_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/non_empty_cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/shadow_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/shadow_container.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/empty_cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/empty_cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/non_empty_cart_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/non_empty_cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/categoryModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/categoryModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/offerModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/offerModel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/productModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/Model/productModel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/app_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/app_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/login_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/signup_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/test/widget_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +52,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components" />
+      <recent name="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens" />
       <recent name="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/Model" />
     </key>
   </component>
@@ -69,10 +83,26 @@
       <screen x="52" y="23" width="1740" height="1097" />
     </state>
     <state x="563" y="437" key="#Scopes/52.23.1740.1097@52.23.1740.1097" timestamp="1627189924196" />
-    <state x="265" y="210" key="SettingsEditor" timestamp="1627063781677">
-      <screen x="54" y="23" width="1738" height="1097" />
+    <state x="265" y="210" key="SettingsEditor" timestamp="1627193579317">
+      <screen x="55" y="23" width="1737" height="1097" />
     </state>
     <state x="265" y="210" key="SettingsEditor/54.23.1738.1097@54.23.1738.1097" timestamp="1627063781677" />
-    <state x="265" y="210" key="SettingsEditor/55.23.1737.1097@55.23.1737.1097" timestamp="1627061650902" />
+    <state x="265" y="210" key="SettingsEditor/55.23.1737.1097@55.23.1737.1097" timestamp="1627193579317" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart</url>
+          <line>63</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart</url>
+          <line>182</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

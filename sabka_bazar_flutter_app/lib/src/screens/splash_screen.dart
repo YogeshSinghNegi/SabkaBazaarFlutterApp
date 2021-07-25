@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/screens/non_empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/non_empty_cart_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const appLogo = "AppLogo";
