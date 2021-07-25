@@ -10,14 +10,12 @@ import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/product_list_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   static const String routName = "/home";
 
   const HomeScreen({Key? key}) : super(key: key);
 
   // @override
-  // _HomeScreenState createState() => _HomeScreenState();
   State<StatefulWidget> createState() {
     return _HomeScreenState();
   }
@@ -25,7 +23,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late PageController _controller;
-
 
   @override
   void initState() {
@@ -37,9 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    bloc.dispose();
-    _controller.dispose();
     super.dispose();
+    _controller.dispose();
+    bloc.dispose();
   }
 
   @override
@@ -47,26 +44,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: MyAppBar(),
-      body:Column(
-          children: [
-            Container(
-              height: 180.0,
-              child:StreamBuilder(
-                stream: bloc.allOffers,
-                builder: (context, AsyncSnapshot<List<OfferModel>> snapshot) {
+      body: Column(
+        children: [
+          Container(
+            height: 180.0,
+            child: StreamBuilder(
+              stream: bloc.allOffers,
+              builder: (context, AsyncSnapshot<List<OfferModel>> snapshot) {
                 if (snapshot.hasData) {
-                return buildOfferList(snapshot);
+                  return buildOfferList(snapshot);
                 } else if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
+                  return Text(snapshot.error.toString());
                 }
                 return Center(child: CircularProgressIndicator());
-                },
-                ),
-
+              },
             ),
-            AppDivider(),
-            Expanded(
-              child:StreamBuilder(
+          ),
+          AppDivider(),
+          Expanded(
+            child: StreamBuilder(
               stream: bloc.allCategory,
               builder: (context, AsyncSnapshot<List<CategoryModel>> snapshot) {
                 if (snapshot.hasData) {
@@ -77,22 +73,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Center(child: CircularProgressIndicator());
               },
             ),
-            ),
-            CopyrightWidget(),
-          ],
-        ),
+          ),
+          CopyrightWidget(),
+        ],
+      ),
     );
   }
-
 
   Widget buildOfferList(AsyncSnapshot<List<OfferModel>> snapshot) {
     return _getOfferPageWidget(snapshot);
   }
+
   Widget buildCategoryList(AsyncSnapshot<List<CategoryModel>> snapshot) {
-    return  _getCategoryListView(snapshot);
+    return _getCategoryListView(snapshot);
   }
 
-  PageIndicatorContainer _getOfferPageWidget(AsyncSnapshot<List<OfferModel>> snapshot) {
+  PageIndicatorContainer _getOfferPageWidget(
+      AsyncSnapshot<List<OfferModel>> snapshot) {
     return PageIndicatorContainer(
       child: PageView(
         children: _getOfferImageWidget(snapshot),
@@ -132,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
             textDirection:
                 index % 2 == 0 ? TextDirection.ltr : TextDirection.rtl,
             children: [
+              // TODO: Image IS BREAKING PLEASE CHECK IT
               // Image.asset(
               //   snapshot.data![index].imageUrl.toString(),
               //   width: 150,
@@ -155,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 10),
                     AppButton(
-                      buttonText:  snapshot.data![index].key.toString(),
+                      buttonText: snapshot.data![index].key.toString(),
                       onPressed: () => _categorySelected(
                         snapshot.data![index],
                       ),

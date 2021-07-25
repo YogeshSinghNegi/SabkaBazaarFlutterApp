@@ -8,14 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16a7260-6def-4bb3-8c48-fb7880f034fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/bloc/home_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/api_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/resources/repositry.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/product_list_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,22 +88,22 @@
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
     <state x="713" y="451" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/55.23.1737.1097@55.23.1737.1097" timestamp="1627201818047" />
-    <state width="1259" height="296" key="GridCell.Tab.0.bottom" timestamp="1627206604653">
+    <state width="1259" height="296" key="GridCell.Tab.0.bottom" timestamp="1627214625849">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
-    <state width="1259" height="296" key="GridCell.Tab.0.bottom/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604653" />
-    <state width="1259" height="296" key="GridCell.Tab.0.center" timestamp="1627206604652">
+    <state width="1259" height="296" key="GridCell.Tab.0.bottom/55.23.1737.1097@55.23.1737.1097" timestamp="1627214625849" />
+    <state width="1259" height="296" key="GridCell.Tab.0.center" timestamp="1627214625848">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
-    <state width="1259" height="296" key="GridCell.Tab.0.center/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604652" />
-    <state width="1259" height="296" key="GridCell.Tab.0.left" timestamp="1627206604652">
+    <state width="1259" height="296" key="GridCell.Tab.0.center/55.23.1737.1097@55.23.1737.1097" timestamp="1627214625848" />
+    <state width="1259" height="296" key="GridCell.Tab.0.left" timestamp="1627214625847">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
-    <state width="1259" height="296" key="GridCell.Tab.0.left/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604652" />
-    <state width="1259" height="296" key="GridCell.Tab.0.right" timestamp="1627206604653">
+    <state width="1259" height="296" key="GridCell.Tab.0.left/55.23.1737.1097@55.23.1737.1097" timestamp="1627214625847" />
+    <state width="1259" height="296" key="GridCell.Tab.0.right" timestamp="1627214625848">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
-    <state width="1259" height="296" key="GridCell.Tab.0.right/55.23.1737.1097@55.23.1737.1097" timestamp="1627206604653" />
+    <state width="1259" height="296" key="GridCell.Tab.0.right/55.23.1737.1097@55.23.1737.1097" timestamp="1627214625848" />
     <state x="265" y="210" key="SettingsEditor" timestamp="1627193579317">
       <screen x="55" y="23" width="1737" height="1097" />
     </state>
