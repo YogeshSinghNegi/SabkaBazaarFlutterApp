@@ -5,27 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16a7260-6def-4bb3-8c48-fb7880f034fa" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/SabkaBazaarFlutterApp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/app_button.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/app_divider.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/app_text_field.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/category_title_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/copyright_widget.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/my_app_bar.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/unfilled_app_button.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/home_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/login_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/product_list_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/signup_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/splash_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/pubspec.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/assets/images/lowest_price.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/components/shadow_container.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/empty_cart_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/screens/non_empty_cart_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/app.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/app_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/components/app_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/sabka_bazar_flutter_app/lib/src/screens/splash_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
