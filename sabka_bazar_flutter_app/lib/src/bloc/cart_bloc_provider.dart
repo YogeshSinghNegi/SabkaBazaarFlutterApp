@@ -5,7 +5,7 @@ export 'cart_bloc.dart';
 class CartBlocProvider extends InheritedWidget{
   final CartBloc bloc;
 
-  CartBlocProvider({required Key key,required Widget child})
+  CartBlocProvider({ Key? key,required Widget child})
       : bloc = CartBloc(),
         super(key: key, child: child);
 

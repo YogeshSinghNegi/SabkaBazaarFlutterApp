@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
@@ -17,7 +18,7 @@ class NonEmptyCartScreen extends StatefulWidget {
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
   late List<CartModel> _cartList;
-  late CartBloc bloc;
+  late CartBloc newbloc;
   @override
   void initState() {
     super.initState();
@@ -25,15 +26,15 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
   }
 
   void didChangeDependencies() {
-    bloc = CartBlocProvider.of(context);
-    bloc.fetchAllCartProduct();
+    newbloc = CartBlocProvider.of(context);
+    newbloc.fetchAllCartProduct();
     print("recreated");
     super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    bloc.dispose();
+    newbloc.dispose();
     super.dispose();
   }
 
@@ -43,7 +44,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       backgroundColor: Colors.white,
       appBar: myCartAppBar(),
       body: StreamBuilder(
-        stream:bloc.allCartProducts,
+        stream:newbloc.allCartProducts,
         builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
           if (snapshot.hasData) {
             return cartData(snapshot.data!);
@@ -341,13 +342,13 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        bloc.substraction.add(element.productId ?? "")
+                                        newbloc.substraction.add(element.productId ?? "")
                                       },
                                     ),
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    _cartList.length.toString(),
+                                   element.qty.toString(),
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 18,
@@ -362,7 +363,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       buttonImage: Icons.add,
                                       isImageOnly: true,
                                       borderRadius: 5,
-                                      onPressed: () => {  bloc.addition.add(element)},
+                                      onPressed: () => {  newbloc.addition.add(element)},
                                     ),
                                   ),
                                   SizedBox(width: 10),
@@ -408,5 +409,10 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       numberOfItemsCart = '(${_cartList.length} items)';
     }
     return numberOfItemsCart;
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CartBloc>('bloc', newbloc));
   }
 }

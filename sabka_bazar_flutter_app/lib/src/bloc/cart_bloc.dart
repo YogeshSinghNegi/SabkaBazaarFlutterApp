@@ -49,9 +49,8 @@ class CartBloc  {
   dispose() async {
     itemAdditionController.close();
     itemSubtractionController.close();
-    _cartFetcher.close();
+
   }
 
 }
 
-// final bloc = CartBloc();
