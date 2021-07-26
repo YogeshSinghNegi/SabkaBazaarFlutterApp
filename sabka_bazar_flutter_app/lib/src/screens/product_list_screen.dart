@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
-import 'package:sabka_bazar_flutter_app/src/bloc/home_bloc.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/product_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
 import 'package:sabka_bazar_flutter_app/src/components/category_title_widget.dart';
@@ -25,6 +25,8 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  final bloc = ProductBloc();
+
   @override
   void initState() {
     super.initState();
@@ -79,7 +81,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
         itemCount: data.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -91,7 +93,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 Row(
                   children: [
                     Image.asset(
