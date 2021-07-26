@@ -4,9 +4,9 @@ import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/extensions/string_extension.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/login_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/validation/field_validation.dart';
 
 class SignupScreen extends StatefulWidget {
   static const String routName = "/signup";
@@ -199,46 +199,33 @@ class _SignupScreenState extends State<SignupScreen> {
       _confirmPasswordErrorText = '';
 
       // Validation for first name
-      if (firstNameText.length > 0 && firstNameText.length < 21)
-        validCount++;
-      else if (firstNameText.isEmpty)
-        _firstNameErrorText = 'First Name cannot be empty';
-      else
-        _firstNameErrorText =
-            'First Name length should be 1-20 characters long';
+      ValidationResult firstNameResult =
+          FieldValidation.validateFirstName(firstNameText);
+      _firstNameErrorText = firstNameResult.message;
+      if (firstNameResult.isValid) validCount++;
 
       // Validation for last name
-      if (lastNameText.length > 0 && lastNameText.length < 21)
-        validCount++;
-      else if (lastNameText.isEmpty)
-        _lastNameErrorText = 'Last Name cannot be empty';
-      else
-        _lastNameErrorText = 'Last Name length should be 1-20 characters long';
+      ValidationResult lastNameResult =
+          FieldValidation.validateLastName(lastNameText);
+      _lastNameErrorText = lastNameResult.message;
+      if (lastNameResult.isValid) validCount++;
 
       // Validation for email
-      if (emailText.isValidEmail())
-        validCount++;
-      else if (emailText.isEmpty)
-        _emailErrorText = 'Email cannot be empty';
-      else
-        _emailErrorText = 'Enter valid email';
+      ValidationResult emailResult = FieldValidation.validateEmail(emailText);
+      _emailErrorText = emailResult.message;
+      if (emailResult.isValid) validCount++;
 
       // Validation for password
-      if (passwordText.length > 5 && passwordText.length < 21)
-        validCount++;
-      else if (passwordText.isEmpty)
-        _passwordErrorText = 'Password cannot be empty';
-      else
-        _passwordErrorText = 'Password length should be 6-20 characters long';
+      ValidationResult passwordResult =
+          FieldValidation.validatePassword(passwordText);
+      _passwordErrorText = passwordResult.message;
+      if (passwordResult.isValid) validCount++;
 
       // Validation for confirm password
-      if (confirmPasswordText.length > 5 && confirmPasswordText.length < 21)
-        validCount++;
-      else if (confirmPasswordText.isEmpty)
-        _confirmPasswordErrorText = 'Confirm Password cannot be empty';
-      else
-        _confirmPasswordErrorText =
-            'Confirm Password length should be 6-20 characters long';
+      ValidationResult confirmPasswordResult =
+          FieldValidation.validatePassword(confirmPasswordText);
+      _confirmPasswordErrorText = confirmPasswordResult.message;
+      if (confirmPasswordResult.isValid) validCount++;
 
       // Validation for password matching with confirm password
       if (validCount == 5) {

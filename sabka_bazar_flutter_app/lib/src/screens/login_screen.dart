@@ -4,9 +4,9 @@ import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/extensions/string_extension.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/validation/field_validation.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "/login";
@@ -144,21 +144,21 @@ class _LoginScreenState extends State<LoginScreen> {
     int validCount = 0;
     String emailText = _emailController.text.trim();
     String passwordText = _passwordController.text.trim();
+
     setState(() {
       _emailErrorText = '';
       _passwordErrorText = '';
-      if (emailText.isValidEmail())
-        validCount++;
-      else if (emailText.isEmpty)
-        _emailErrorText = 'Email cannot be empty';
-      else
-        _emailErrorText = 'Enter valid email';
-      if (passwordText.length > 5 && passwordText.length < 21)
-        validCount++;
-      else if (passwordText.isEmpty)
-        _passwordErrorText = 'Password cannot be empty';
-      else
-        _passwordErrorText = 'Password length should be 6-20 characters long';
+
+      // Validation for email
+      ValidationResult emailResult = FieldValidation.validateEmail(emailText);
+      _emailErrorText = emailResult.message;
+      if (emailResult.isValid) validCount++;
+
+      // Validation for password
+      ValidationResult passwordResult =
+          FieldValidation.validatePassword(passwordText);
+      _passwordErrorText = passwordResult.message;
+      if (passwordResult.isValid) validCount++;
     });
     return validCount == 2;
   }
