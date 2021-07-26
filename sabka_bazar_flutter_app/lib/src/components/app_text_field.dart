@@ -7,6 +7,7 @@ class AppTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String errorText;
+  final Function onTextChange;
 
   const AppTextField({
     required this.labelText,
@@ -15,6 +16,7 @@ class AppTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     required this.controller,
     this.errorText = '',
+    required this.onTextChange,
     Key? key,
   }) : super(key: key);
 
@@ -23,6 +25,7 @@ class AppTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
       child: TextFormField(
+        onChanged: (value) => onTextChange(),
         controller: controller,
         obscureText: isSecureText,
         cursorColor: Colors.black,

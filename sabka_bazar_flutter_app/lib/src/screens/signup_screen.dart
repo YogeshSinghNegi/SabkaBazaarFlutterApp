@@ -4,6 +4,7 @@ import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/extensions/string_extension.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/login_screen.dart';
 
@@ -23,6 +24,12 @@ class _SignupScreenState extends State<SignupScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
+  String _firstNameErrorText = '';
+  String _lastNameErrorText = '';
+  String _emailErrorText = '';
+  String _passwordErrorText = '';
+  String _confirmPasswordErrorText = '';
+
   @override
   void initState() {
     // TODO: implement initState
@@ -32,6 +39,22 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.text = '';
     _passwordController.text = '';
     _confirmPasswordController.text = '';
+    _firstNameErrorText = '';
+    _lastNameErrorText = '';
+    _emailErrorText = '';
+    _passwordErrorText = '';
+    _confirmPasswordErrorText = '';
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
   }
 
   @override
@@ -78,30 +101,44 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "Enter your First Name",
                       keyboardType: TextInputType.name,
                       controller: _firstNameController,
+                      errorText: _firstNameErrorText,
+                      onTextChange: () =>
+                          setState(() => _firstNameErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Last Name",
                       hintText: "Enter your Last Name",
                       keyboardType: TextInputType.name,
                       controller: _lastNameController,
+                      errorText: _lastNameErrorText,
+                      onTextChange: () =>
+                          setState(() => _lastNameErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Email",
                       hintText: "Enter your Email",
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
+                      errorText: _emailErrorText,
+                      onTextChange: () => setState(() => _emailErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Password",
                       hintText: "Enter your password",
                       isSecureText: true,
                       controller: _passwordController,
+                      errorText: _passwordErrorText,
+                      onTextChange: () =>
+                          setState(() => _passwordErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Confirm Password",
                       hintText: "Enter your Confirm password",
                       isSecureText: true,
                       controller: _confirmPasswordController,
+                      errorText: _confirmPasswordErrorText,
+                      onTextChange: () =>
+                          setState(() => _confirmPasswordErrorText = ''),
                     ),
                     SizedBox(height: 30),
                     AppButton(
@@ -128,7 +165,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           'Already have an account?',
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(width: 20),
                         UnfilledAppButton(
                           buttonText: 'Login',
                           onPressed: () => _loginBtnTapped(),
@@ -147,11 +183,81 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  bool _isLoginValid() {
+    int validCount = 0;
+    String firstNameText = _firstNameController.text.trim();
+    String lastNameText = _lastNameController.text.trim();
+    String emailText = _emailController.text.trim();
+    String passwordText = _passwordController.text.trim();
+    String confirmPasswordText = _confirmPasswordController.text.trim();
+
+    setState(() {
+      _firstNameErrorText = '';
+      _lastNameErrorText = '';
+      _emailErrorText = '';
+      _passwordErrorText = '';
+      _confirmPasswordErrorText = '';
+
+      // Validation for first name
+      if (firstNameText.length > 0 && firstNameText.length < 21)
+        validCount++;
+      else if (firstNameText.isEmpty)
+        _firstNameErrorText = 'First Name cannot be empty';
+      else
+        _firstNameErrorText =
+            'First Name length should be 1-20 characters long';
+
+      // Validation for last name
+      if (lastNameText.length > 0 && lastNameText.length < 21)
+        validCount++;
+      else if (lastNameText.isEmpty)
+        _lastNameErrorText = 'Last Name cannot be empty';
+      else
+        _lastNameErrorText = 'Last Name length should be 1-20 characters long';
+
+      // Validation for email
+      if (emailText.isValidEmail())
+        validCount++;
+      else if (emailText.isEmpty)
+        _emailErrorText = 'Email cannot be empty';
+      else
+        _emailErrorText = 'Enter valid email';
+
+      // Validation for password
+      if (passwordText.length > 5 && passwordText.length < 21)
+        validCount++;
+      else if (passwordText.isEmpty)
+        _passwordErrorText = 'Password cannot be empty';
+      else
+        _passwordErrorText = 'Password length should be 6-20 characters long';
+
+      // Validation for confirm password
+      if (confirmPasswordText.length > 5 && confirmPasswordText.length < 21)
+        validCount++;
+      else if (confirmPasswordText.isEmpty)
+        _confirmPasswordErrorText = 'Confirm Password cannot be empty';
+      else
+        _confirmPasswordErrorText =
+            'Confirm Password length should be 6-20 characters long';
+
+      // Validation for password matching with confirm password
+      if (validCount == 5) {
+        if (passwordText == confirmPasswordText)
+          validCount++;
+        else
+          _confirmPasswordErrorText =
+              'Password & Confirm Password does not match';
+      }
+    });
+    return validCount == 6;
+  }
+
   void _loginBtnTapped() {
     Navigator.of(context).pushReplacementNamed(LoginScreen.routName);
   }
 
   void _signupBtnTapped() {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    if (_isLoginValid())
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
   }
 }

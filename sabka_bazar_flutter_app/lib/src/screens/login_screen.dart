@@ -21,12 +21,25 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String _emailErrorText = '';
+  String _passwordErrorText = '';
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _emailController.text = '';
     _passwordController.text = '';
+    _emailErrorText = '';
+    _passwordErrorText = '';
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -73,12 +86,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: "Enter your Email",
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
+                      errorText: _emailErrorText,
+                      onTextChange: () => setState(() => _emailErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Password",
                       hintText: "Enter your password",
                       isSecureText: true,
                       controller: _passwordController,
+                      errorText: _passwordErrorText,
+                      onTextChange: () =>
+                          setState(() => _passwordErrorText = ''),
                     ),
                     SizedBox(height: 30),
                     AppButton(
@@ -105,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Do not have an account?',
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(width: 20),
                         UnfilledAppButton(
                           buttonText: 'Signup',
                           onPressed: () => _signupBtnTapped(),
@@ -124,10 +141,26 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   bool _isLoginValid() {
-    var isValid = true;
-    if (_emailController.text.trim().isValidEmail()) isValid = true;
-    if (_passwordController.text.trim().length > 5) isValid = true;
-    return isValid;
+    int validCount = 0;
+    String emailText = _emailController.text.trim();
+    String passwordText = _passwordController.text.trim();
+    setState(() {
+      _emailErrorText = '';
+      _passwordErrorText = '';
+      if (emailText.isValidEmail())
+        validCount++;
+      else if (emailText.isEmpty)
+        _emailErrorText = 'Email cannot be empty';
+      else
+        _emailErrorText = 'Enter valid email';
+      if (passwordText.length > 5 && passwordText.length < 21)
+        validCount++;
+      else if (passwordText.isEmpty)
+        _passwordErrorText = 'Password cannot be empty';
+      else
+        _passwordErrorText = 'Password length should be 6-20 characters long';
+    });
+    return validCount == 2;
   }
 
   void _loginBtnTapped() {
