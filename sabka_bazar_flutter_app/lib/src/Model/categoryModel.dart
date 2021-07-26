@@ -1,5 +1,4 @@
 class CategoryModel {
-  String? id;
   String? categoryId;
   String? name;
   String? key;
@@ -11,7 +10,6 @@ class CategoryModel {
   CategoryModel({
     this.name,
     this.categoryId,
-    this.id,
     this.key,
     this.description,
     this.enabled,
@@ -20,7 +18,6 @@ class CategoryModel {
   });
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     categoryId = json['categoryId'] == null
         ? '5b6899953d1a866534f516e2'
         : json['categoryId'];
@@ -35,7 +32,6 @@ class CategoryModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
     data['categoryId'] = this.categoryId;
     data['name'] = this.name;
     data['key'] = this.key;

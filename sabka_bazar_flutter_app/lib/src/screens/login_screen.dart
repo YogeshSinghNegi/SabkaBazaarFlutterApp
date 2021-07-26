@@ -3,10 +3,12 @@ import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/components/show_alert_dialog.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/extensions/string_extension.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/validation/field_validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "/login";
@@ -21,12 +23,25 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  String _emailErrorText = '';
+  String _passwordErrorText = '';
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _emailController.text = '';
     _passwordController.text = '';
+    _emailErrorText = '';
+    _passwordErrorText = '';
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -73,12 +88,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: "Enter your Email",
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
+                      errorText: _emailErrorText,
+                      onTextChange: () => setState(() => _emailErrorText = ''),
                     ),
                     AppTextField(
                       labelText: "Password",
                       hintText: "Enter your password",
                       isSecureText: true,
                       controller: _passwordController,
+                      errorText: _passwordErrorText,
+                      onTextChange: () =>
+                          setState(() => _passwordErrorText = ''),
                     ),
                     SizedBox(height: 30),
                     AppButton(
@@ -105,7 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Do not have an account?',
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(width: 20),
                         UnfilledAppButton(
                           buttonText: 'Signup',
                           onPressed: () => _signupBtnTapped(),
@@ -124,15 +143,54 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   bool _isLoginValid() {
-    var isValid = true;
-    if (_emailController.text.trim().isValidEmail()) isValid = true;
-    if (_passwordController.text.trim().length > 5) isValid = true;
-    return isValid;
+    int validCount = 0;
+    String emailText = _emailController.text.trim();
+    String passwordText = _passwordController.text.trim();
+
+    setState(() {
+      _emailErrorText = '';
+      _passwordErrorText = '';
+
+      // Validation for email
+      ValidationResult emailResult = FieldValidation.validateEmail(emailText);
+      _emailErrorText = emailResult.message;
+      if (emailResult.isValid) validCount++;
+
+      // Validation for password
+      ValidationResult passwordResult =
+          FieldValidation.validatePassword(passwordText);
+      _passwordErrorText = passwordResult.message;
+      if (passwordResult.isValid) validCount++;
+    });
+    return validCount == 2;
+  }
+
+  Future<void> _saveUserDataInPreferences() async {
+    //TODO: this is how we can save information is user default after successful login/signup
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // int counter = (prefs.getInt('counter') ?? 0) + 1;
+    // print('Pressed $counter times.');
+    // await prefs.setInt('counter', counter);
   }
 
   void _loginBtnTapped() {
-    if (_isLoginValid())
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    if (_isLoginValid()) {
+      //TODO: Hit Login API here
+      _saveUserDataInPreferences();
+
+      //TODO: to show custom dialog
+      showMyDialog(context, 'title', [
+        Text('text1')
+      ], [
+        TextButton(
+          child: Text('Approve'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+          },
+        ),
+      ]);
+    }
   }
 
   void _signupBtnTapped() {
