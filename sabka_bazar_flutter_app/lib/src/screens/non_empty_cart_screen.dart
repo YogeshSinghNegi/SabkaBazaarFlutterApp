@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
-import 'package:sabka_bazar_flutter_app/components/shadow_container.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
 
 class NonEmptyCartScreen extends StatefulWidget {
   static const String routName = "/non_empty_cart";
@@ -65,7 +65,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
               children: [
                 Column(
                   children: [
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
                     Container(
                       width: (MediaQuery.of(context).size.width),
                       height: 65,

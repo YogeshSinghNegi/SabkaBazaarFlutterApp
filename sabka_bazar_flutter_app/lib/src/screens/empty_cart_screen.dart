@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 
 class EmptyCartScreen extends StatelessWidget {
   static const String routName = "/empty_cart";

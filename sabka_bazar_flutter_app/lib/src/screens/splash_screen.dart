@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/screens/login_screen.dart';
+import 'login_screen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   static const appLogo = "AppLogo";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sabka_bazar_flutter_app/screens/non_empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/non_empty_cart_screen.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isHideCartButton;

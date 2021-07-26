@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/components/app_text_field.dart';
-import 'package:sabka_bazar_flutter_app/components/copyright_widget.dart';
-import 'package:sabka_bazar_flutter_app/components/my_app_bar.dart';
-import 'package:sabka_bazar_flutter_app/components/unfilled_app_button.dart';
-import 'package:sabka_bazar_flutter_app/extensions/string_extension.dart';
-import 'package:sabka_bazar_flutter_app/screens/home_screen.dart';
-import 'package:sabka_bazar_flutter_app/screens/signup_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
+import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
+import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/extensions/string_extension.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "/login";
@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   bool _isLoginValid() {
-    var isValid = false;
+    var isValid = true;
     if (_emailController.text.trim().isValidEmail()) isValid = true;
     if (_passwordController.text.trim().length > 5) isValid = true;
     return isValid;
