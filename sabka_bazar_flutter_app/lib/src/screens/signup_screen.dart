@@ -17,6 +17,23 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _firstNameController.text = '';
+    _lastNameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,26 +77,31 @@ class _SignupScreenState extends State<SignupScreen> {
                       labelText: "First Name",
                       hintText: "Enter your First Name",
                       keyboardType: TextInputType.name,
+                      controller: _firstNameController,
                     ),
                     AppTextField(
                       labelText: "Last Name",
                       hintText: "Enter your Last Name",
                       keyboardType: TextInputType.name,
+                      controller: _lastNameController,
                     ),
                     AppTextField(
                       labelText: "Email",
                       hintText: "Enter your Email",
                       keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
                     ),
                     AppTextField(
                       labelText: "Password",
                       hintText: "Enter your password",
                       isSecureText: true,
+                      controller: _passwordController,
                     ),
                     AppTextField(
                       labelText: "Confirm Password",
                       hintText: "Enter your Confirm password",
                       isSecureText: true,
+                      controller: _confirmPasswordController,
                     ),
                     SizedBox(height: 30),
                     AppButton(
