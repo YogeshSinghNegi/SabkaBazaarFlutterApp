@@ -3,6 +3,7 @@ import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/components/show_alert_dialog.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
@@ -167,16 +168,28 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _saveUserDataInPreferences() async {
     //TODO: this is how we can save information is user default after successful login/signup
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('counter') ?? 0) + 1;
-    print('Pressed $counter times.');
-    await prefs.setInt('counter', counter);
+    // int counter = (prefs.getInt('counter') ?? 0) + 1;
+    // print('Pressed $counter times.');
+    // await prefs.setInt('counter', counter);
   }
 
   void _loginBtnTapped() {
     if (_isLoginValid()) {
       //TODO: Hit Login API here
       _saveUserDataInPreferences();
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+
+      //TODO: to show custom dialog
+      showMyDialog(context, 'title', [
+        Text('text1')
+      ], [
+        TextButton(
+          child: Text('Approve'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+          },
+        ),
+      ]);
     }
   }
 
