@@ -129,12 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
             textDirection:
                 index % 2 == 0 ? TextDirection.ltr : TextDirection.rtl,
             children: [
-              // TODO: Image IS BREAKING PLEASE CHECK IT
-              // Image.asset(
-              //   snapshot.data![index].imageUrl.toString(),
-              //   width: 150,
-              //   height: 150,
-              // ),
+              Image.asset(
+                snapshot.data![index].imageUrl.toString(),
+                width: 150,
+                height: 150,
+              ),
               Expanded(
                 child: Column(
                   children: [
@@ -173,8 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => ProductListScreen(
-          categoryId: model.id ?? '12',
-          categoryName: model.name ?? 'qwerty',
+          categoryId: model.categoryId.toString(),
+          categoryName: model.name.toString(),
         ),
         fullscreenDialog: true,
       ),

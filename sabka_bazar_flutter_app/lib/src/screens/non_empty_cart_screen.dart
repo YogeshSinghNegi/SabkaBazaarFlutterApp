@@ -65,7 +65,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
               children: [
                 Column(
                   children: [
-                    SizedBox(height: 40),
+                    SizedBox(height: 20),
                     Container(
                       width: (MediaQuery.of(context).size.width),
                       height: 65,

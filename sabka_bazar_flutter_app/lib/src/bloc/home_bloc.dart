@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:rxdart/rxdart.dart' show PublishSubject;
 import 'package:sabka_bazar_flutter_app/src/Model/categoryModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
@@ -11,23 +12,23 @@ class HomeBloc {
   final _categoryFetcher = PublishSubject<List<CategoryModel>>();
   final _productFetcher = PublishSubject<List<ProductModel>>();
 
-
   Stream<List<OfferModel>> get allOffers => _offerFetcher.stream;
   Stream<List<CategoryModel>> get allCategory => _categoryFetcher.stream;
   Stream<List<ProductModel>> get allProducts => _productFetcher.stream;
 
   fetchAllOffers() async {
-    List<OfferModel> offerModelList  = await _repository.fetchAllOffers();
+    List<OfferModel> offerModelList = await _repository.fetchAllOffers();
     _offerFetcher.sink.add(offerModelList);
   }
 
   fetchAllCategories() async {
-    List<CategoryModel> categoryModel  = await _repository.fetchAllCategory();
+    List<CategoryModel> categoryModel = await _repository.fetchAllCategory();
     _categoryFetcher.sink.add(categoryModel);
   }
 
-  fetchAllProducts() async {
-    List<ProductModel> productModel  = await _repository.fetchAllProducts();
+  fetchAllProducts(String categoryId) async {
+    List<ProductModel> productModel =
+        await _repository.fetchAllProducts(categoryId);
     _productFetcher.sink.add(productModel);
   }
 
@@ -35,7 +36,6 @@ class HomeBloc {
     _offerFetcher.close();
     _categoryFetcher.close();
     _productFetcher.close();
-
   }
 }
 
