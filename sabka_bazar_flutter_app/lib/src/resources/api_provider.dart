@@ -61,6 +61,25 @@ class ApiProvider {
       throw Exception('Failed to load post');
     }
   }
+
+
+  Future<List<ProductModel>> fetchCartList() async {
+    Response response;
+    if(_baseUrl != "") {
+      response = await client.get(Uri.parse("$_baseUrl/cart/items"));
+    }else{
+      throw Exception('Please add your BaseUrl');
+    }
+    if (response.statusCode == 200) {
+      // If the call to the server was successful, parse the JSON
+      var tagObjJson = jsonDecode(response.body) as List;
+      List<ProductModel> tagObs = tagObjJson.map((tagJson) => ProductModel.fromJson(tagJson)).toList();
+      return tagObs;
+    } else {
+      // If that call was not successful, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
   // Future<TrailerModel> fetchTrailer(int movieId) async {
   //   final response =
   //   await client.get("$_baseUrl/$movieId/videos?api_key=$_apiKey");

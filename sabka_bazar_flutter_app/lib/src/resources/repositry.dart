@@ -10,6 +10,6 @@ class Repository {
   Future<List<OfferModel>> fetchAllOffers() => apiProvider.fetchOfferList();
   Future<List<CategoryModel>> fetchAllCategory() => apiProvider.fetchCategoryList();
   Future<List<ProductModel>> fetchAllProducts() => apiProvider.fetchProductList();
-
+  Future<List<ProductModel>> fetchAllCartProducts() => apiProvider.fetchCartList();
   //Future<TrailerModel> fetchTrailers(int movieId) => moviesApiProvider.fetchTrailer(movieId);
 }

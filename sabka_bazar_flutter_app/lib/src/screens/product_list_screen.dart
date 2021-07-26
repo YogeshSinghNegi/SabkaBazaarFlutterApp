@@ -8,6 +8,7 @@ import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 
 import 'empty_cart_screen.dart';
+import 'non_empty_cart_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   static const String routName = "/product_list";
@@ -122,7 +123,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => EmptyCartScreen(),
+                                  builder: (context) => NonEmptyCartScreen(),
                                   fullscreenDialog: true,
                                 ),
                               )

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/Cart_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
@@ -14,51 +16,134 @@ class NonEmptyCartScreen extends StatefulWidget {
 }
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
-  var _cartList = [
-    {
-      "id": "5b6c6a7f01a7c38429530883",
-      "name": "Fresho Kiwi - Green, 3 pcs",
-      "description":
-          "Kiwis are oval shaped with a brownish outer skin. The flesh is bright green and juicy with tiny, edible black seeds.",
-      "imageURL": "assets/images/kiwi-green.jpg",
-      "price": 87,
-      "stock": 50,
-      "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3",
-      "quantity": 1,
-    },
-    {
-      "id": "5b6c6a7f01a7c38429530883",
-      "name": "Fresho Kiwi - Green, 3 pcs",
-      "description":
-          "Kiwis are oval shaped with a brownish outer skin. The flesh is bright green and juicy with tiny, edible black seeds.",
-      "imageURL": "assets/images/apple.jpg",
-      "price": 87,
-      "stock": 50,
-      "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3",
-      "quantity": 3,
-    },
-    {
-      "id": "5b6c6a7f01a7c38429530883",
-      "name": "Fresho Kiwi - Green, 3 pcs",
-      "description":
-          "Kiwis are oval shaped with a brownish outer skin. The flesh is bright green and juicy with tiny, edible black seeds.",
-      "imageURL": "assets/images/kiwi-green.jpg",
-      "price": 87,
-      "stock": 50,
-      "category": "5b6899953d1a866534f516e2",
-      "sku": "fnw-kiwi-3",
-      "quantity": 2,
-    }
-  ];
+  late List<ProductModel> _cartList;
+  @override
+  void initState() {
+    super.initState();
+    bloc.fetchAllCartProduct();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    bloc.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
-      appBar: MyAppBar(isShowCrossButton: true),
-      body: Column(
+        backgroundColor: Colors.white,
+        appBar:myCartAppBar(),
+        body:StreamBuilder(
+      stream: bloc.allCartProducts,
+      builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
+        if (snapshot.hasData) {
+          return cartData(snapshot);
+        } else if (snapshot.hasError) {
+          return cartEmpty();
+        }
+        return Center(child: CircularProgressIndicator());
+      },
+        ),
+    );
+  }
+
+  Widget cartEmpty() {
+    return  SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: Container()),
+            Text(
+              'No items in your cart',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Your favourite items are just a click away',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            Expanded(child: Container()),
+            Container(
+              width: (MediaQuery.of(context).size.width),
+              height: 60,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: AppButton(
+                  buttonText: 'Start Shopping',
+                  onPressed: () => {},
+                  borderRadius: 5,
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+  }
+
+  PreferredSizeWidget myCartAppBar(){
+    // return if(_cartList.isNotEmpty){
+    //   return  SafeArea(
+    //     child: Column(
+    //       children: [
+    //         Expanded(child: Container()),
+    //         Text(
+    //           'No items in your cart',
+    //           textAlign: TextAlign.center,
+    //           style: TextStyle(
+    //             fontSize: 24,
+    //             fontWeight: FontWeight.bold,
+    //           ),
+    //         ),
+    //         SizedBox(height: 10),
+    //         Text(
+    //           'Your favourite items are just a click away',
+    //           textAlign: TextAlign.center,
+    //           style: TextStyle(
+    //             fontSize: 18,
+    //           ),
+    //         ),
+    //         Expanded(child: Container()),
+    //         Container(
+    //           width: (MediaQuery.of(context).size.width),
+    //           height: 60,
+    //           child: Padding(
+    //             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+    //             child: AppButton(
+    //               buttonText: 'Start Shopping',
+    //               onPressed: () => {},
+    //               borderRadius: 5,
+    //             ),
+    //           ),
+    //         )
+    //       ],
+    //     ),
+    //   );
+    // }else {
+      return AppBar(
+        backgroundColor: Colors.black,
+        title: Text('My Cart'),
+        leadingWidth: 0,
+        leading: SizedBox(),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(Icons.close),
+          ),
+        ],
+      );
+   // }
+  }
+  Widget cartData(AsyncSnapshot<List<ProductModel>> snapshot) {
+    _cartList = snapshot.data!;
+    return Column(
         children: [
           Flexible(
             child: ListView(
@@ -97,7 +182,18 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    _getItemListWidget(),
+                    StreamBuilder(
+                      stream: bloc.allCartProducts,
+                      builder: (context,
+                          AsyncSnapshot<List<ProductModel>> snapshot) {
+                        if (snapshot.hasData) {
+                          return _getItemListWidget();
+                        } else if (snapshot.hasError) {
+                          return Text(snapshot.error.toString());
+                        }
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    ),
                     SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -180,7 +276,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                             ),
                             Expanded(child: Container()),
                             Text(
-                              'Rs.' + _cartList[0]["price"].toString(),
+                              'Rs.' + _cartList[0].price.toString(),
                               style: TextStyle(
                                 fontSize: 18,
                               ),
@@ -198,8 +294,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
             ),
           ),
         ],
-      ),
-    );
+      );
+
   }
 
   Column _getItemListWidget() {
@@ -218,7 +314,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 20, 0, 20),
                         child: Image.asset(
-                          _cartList[0]["imageURL"].toString(),
+                          element.imageURL.toString(),
                           height: 100,
                         ),
                       ),
@@ -280,7 +376,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'Rs.' + _cartList[0]["price"].toString(),
+                                    'Rs.' + element.price.toString(),
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 18,
@@ -288,7 +384,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'Rs.' + _cartList[0]["price"].toString(),
+                                      'Rs.' + element.price.toString(),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                         fontSize: 18,
