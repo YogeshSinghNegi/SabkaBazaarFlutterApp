@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client, Response;
+import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/categoryModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
@@ -71,31 +72,48 @@ class ApiProvider {
   }
 
 
-  Future<List<ProductModel>> fetchCartList() async {
+  Future<List<CartModel>> fetchCartList() async {
     Response response;
     if(_baseUrl != "") {
       response = await client.get(Uri.parse("$_baseUrl/cart/items"));
     }else{
       throw Exception('Please add your BaseUrl');
     }
+    print(response.statusCode);
     if (response.statusCode == 200) {
       // If the call to the server was successful, parse the JSON
       var tagObjJson = jsonDecode(response.body) as List;
-      List<ProductModel> tagObs = tagObjJson.map((tagJson) => ProductModel.fromJson(tagJson)).toList();
+      List<CartModel> tagObs = tagObjJson.map((tagJson) => CartModel.fromJson(tagJson)).toList();
       return tagObs;
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');
     }
   }
-  // Future<TrailerModel> fetchTrailer(int movieId) async {
-  //   final response =
-  //   await client.get("$_baseUrl/$movieId/videos?api_key=$_apiKey");
-  //
-  //   if (response.statusCode == 200) {
-  //     return TrailerModel.fromJson(json.decode(response.body));
-  //   } else {
-  //     throw Exception('Failed to load trailers');
-  //   }
-  // }
+  
+  Future<List<CartModel>> fetchCartByAdd(CartModel productInfo) async {
+    final response =
+    await client.post(Uri.parse("$_baseUrl/cart/addToCart"),body:productInfo.toJson() );
+
+    if (response.statusCode == 200) {
+      var tagObjJson = jsonDecode(response.body) as List;
+      List<CartModel> tagObs = tagObjJson.map((tagJson) => CartModel.fromJson(tagJson)).toList();
+      return tagObs;
+    } else {
+      throw Exception('Failed to load trailers');
+    }
+  }
+
+  Future<List<CartModel>> fetchCartByDelete(String productId) async {
+    final response =
+    await client.delete(Uri.parse("$_baseUrl/cart/deleteToCart?productId=$productId"));
+
+    if (response.statusCode == 200) {
+      var tagObjJson = jsonDecode(response.body) as List;
+      List<CartModel> tagObs = tagObjJson.map((tagJson) => CartModel.fromJson(tagJson)).toList();
+      return tagObs;
+    } else {
+      throw Exception('Failed to load trailers');
+    }
+  }
 }

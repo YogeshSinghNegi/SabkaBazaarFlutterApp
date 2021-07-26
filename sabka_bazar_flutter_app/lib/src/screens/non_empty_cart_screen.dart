@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
-import 'package:sabka_bazar_flutter_app/src/bloc/Cart_bloc.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc_provider.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
 
 class NonEmptyCartScreen extends StatefulWidget {
@@ -16,78 +16,86 @@ class NonEmptyCartScreen extends StatefulWidget {
 }
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
-  late List<ProductModel> _cartList;
+  late List<CartModel> _cartList;
+  late CartBloc bloc;
   @override
   void initState() {
     super.initState();
+
+  }
+
+  void didChangeDependencies() {
+    bloc = CartBlocProvider.of(context);
     bloc.fetchAllCartProduct();
+    print("recreated");
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    super.dispose();
     bloc.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar:myCartAppBar(),
-        body:StreamBuilder(
-      stream: bloc.allCartProducts,
-      builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
-        if (snapshot.hasData) {
-          return cartData(snapshot);
-        } else if (snapshot.hasError) {
-          return cartEmpty();
-        }
-        return Center(child: CircularProgressIndicator());
-      },
-        ),
+      backgroundColor: Colors.white,
+      appBar: myCartAppBar(),
+      body: StreamBuilder(
+        stream:bloc.allCartProducts,
+        builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
+          if (snapshot.hasData) {
+            return cartData(snapshot.data!);
+          } else if (snapshot.hasError) {
+            return cartEmpty();
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 
   Widget cartEmpty() {
-    return  SafeArea(
-        child: Column(
-          children: [
-            Expanded(child: Container()),
-            Text(
-              'No items in your cart',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Column(
+        children: [
+          Expanded(child: Container()),
+          Text(
+            'No items in your cart',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            'Your favourite items are just a click away',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          Expanded(child: Container()),
+          Container(
+            width: (MediaQuery.of(context).size.width),
+            height: 60,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: AppButton(
+                buttonText: 'Start Shopping',
+                onPressed: () => {},
+                borderRadius: 5,
               ),
             ),
-            SizedBox(height: 10),
-            Text(
-              'Your favourite items are just a click away',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            Expanded(child: Container()),
-            Container(
-              width: (MediaQuery.of(context).size.width),
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: AppButton(
-                  buttonText: 'Start Shopping',
-                  onPressed: () => {},
-                  borderRadius: 5,
-                ),
-              ),
-            )
-          ],
-        ),
-      );
+          )
+        ],
+      ),
+    );
   }
 
-  PreferredSizeWidget myCartAppBar(){
+  PreferredSizeWidget myCartAppBar() {
     // return if(_cartList.isNotEmpty){
     //   return  SafeArea(
     //     child: Column(
@@ -126,176 +134,165 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
     //     ),
     //   );
     // }else {
-      return AppBar(
-        backgroundColor: Colors.black,
-        title: Text('My Cart'),
-        leadingWidth: 0,
-        leading: SizedBox(),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.close),
-          ),
-        ],
-      );
-   // }
+    return AppBar(
+      backgroundColor: Colors.black,
+      title: Text('My Cart'),
+      leadingWidth: 0,
+      leading: SizedBox(),
+      centerTitle: false,
+      actions: [
+        IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.close),
+        ),
+      ],
+    );
+    // }
   }
-  Widget cartData(AsyncSnapshot<List<ProductModel>> snapshot) {
-    _cartList = snapshot.data!;
+
+  Widget cartData(List<CartModel> model) {
+    _cartList = model;
     return Column(
-        children: [
-          Flexible(
-            child: ListView(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: 20),
-                    Container(
-                      width: (MediaQuery.of(context).size.width),
-                      height: 65,
-                      color: Colors.white,
+      children: [
+        Flexible(
+          child: ListView(
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: 20),
+                  Container(
+                    width: (MediaQuery.of(context).size.width),
+                    height: 65,
+                    color: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          child: Text(
+                            'My Cart',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          _getNumberOfItemCart(),
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  _getItemListWidget(),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Container(
+                      height: 90,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                            child: Image.asset(
+                              'assets/images/lowest_price.png',
+                            ),
+                          ),
+                          SizedBox(width: 20),
+                          Flexible(
                             child: Text(
-                              'My Cart',
+                              'You won\'t find it cheaper anywhere',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          SizedBox(width: 5),
-                          Text(
-                            _getNumberOfItemCart(),
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
-                          )
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
-                    StreamBuilder(
-                      stream: bloc.allCartProducts,
-                      builder: (context,
-                          AsyncSnapshot<List<ProductModel>> snapshot) {
-                        if (snapshot.hasData) {
-                          return _getItemListWidget();
-                        } else if (snapshot.hasError) {
-                          return Text(snapshot.error.toString());
-                        }
-                        return Center(child: CircularProgressIndicator());
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: Container(
-                        height: 90,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        // Expanded(child: Container()),
+        ShadowContainer(
+          child: Column(
+            children: [
+              SizedBox(height: 15),
+              Text(
+                'Promo code can be applied on payment page',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: (MediaQuery.of(context).size.width),
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                              child: Image.asset(
-                                'assets/images/lowest_price.png',
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            Flexible(
-                              child: Text(
-                                'You won\'t find it cheaper anywhere',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.pink.shade800),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          // Expanded(child: Container()),
-          ShadowContainer(
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                Text(
-                  'Promo code can be applied on payment page',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  width: (MediaQuery.of(context).size.width),
-                  height: 60,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: TextButton(
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                    onPressed: () => {},
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Proceed to Checkout',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
-                        ),
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.pink.shade800),
-                      ),
-                      onPressed: () => {},
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Proceed to Checkout',
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
+                          Expanded(child: Container()),
+                          Text(
+                            'Rs.' + "1212",
+                            style: TextStyle(
+                              fontSize: 18,
                             ),
-                            Expanded(child: Container()),
-                            Text(
-                              'Rs.' + _cartList[0].price.toString(),
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Icon(Icons.arrow_forward_ios, size: 15),
-                          ],
-                        ),
+                          ),
+                          SizedBox(width: 10),
+                          Icon(Icons.arrow_forward_ios, size: 15),
+                        ],
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
-              ],
-            ),
+              ),
+              SizedBox(height: 40),
+            ],
           ),
-        ],
-      );
-
+        ),
+      ],
+    );
   }
 
   Column _getItemListWidget() {
@@ -343,7 +340,9 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       buttonImage: Icons.remove,
                                       isImageOnly: true,
                                       borderRadius: 5,
-                                      onPressed: () => {},
+                                      onPressed: () => {
+                                        bloc.substraction.add(element.productId ?? "")
+                                      },
                                     ),
                                   ),
                                   SizedBox(width: 10),
@@ -363,7 +362,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       buttonImage: Icons.add,
                                       isImageOnly: true,
                                       borderRadius: 5,
-                                      onPressed: () => {},
+                                      onPressed: () => {  bloc.addition.add(element)},
                                     ),
                                   ),
                                   SizedBox(width: 10),
