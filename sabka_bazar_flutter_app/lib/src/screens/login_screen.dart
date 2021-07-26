@@ -7,6 +7,7 @@ import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart'
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/validation/field_validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "/login";
@@ -163,9 +164,20 @@ class _LoginScreenState extends State<LoginScreen> {
     return validCount == 2;
   }
 
+  Future<void> _saveUserDataInPreferences() async {
+    //TODO: this is how we can save information is user default after successful login/signup
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int counter = (prefs.getInt('counter') ?? 0) + 1;
+    print('Pressed $counter times.');
+    await prefs.setInt('counter', counter);
+  }
+
   void _loginBtnTapped() {
-    if (_isLoginValid())
+    if (_isLoginValid()) {
+      //TODO: Hit Login API here
+      _saveUserDataInPreferences();
       Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    }
   }
 
   void _signupBtnTapped() {
