@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
-import 'package:sabka_bazar_flutter_app/src/screens/cart_screen_container.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/cart_screen.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isHideCartButton;
@@ -51,7 +51,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: (() => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CartScreenContainer(),
+                    builder: (context) => CartScreen(),
                     fullscreenDialog: true,
                   ),
                 )),

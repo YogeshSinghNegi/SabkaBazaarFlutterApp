@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc_provider.dart';
-import 'package:sabka_bazar_flutter_app/src/screens/cart_screen_container.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/cart_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/login_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
@@ -19,7 +19,7 @@ class App extends StatelessWidget {
           HomeScreen.routName: (_) => HomeScreen(),
           LoginScreen.routName: (_) => LoginScreen(),
           SignupScreen.routName: (_) => SignupScreen(),
-          CartScreenContainer.routName: (_) => CartScreenContainer(),
+          CartScreen.routName: (_) => CartScreen(),
         },
       ),
     );

@@ -13,14 +13,18 @@ class CartBloc {
   Sink<String> get substraction => cartItemSubtraction.sink;
   final cartItemSubtraction = StreamController<String>();
 
+  Sink<String> get clear => cartItemClear.sink;
+  final cartItemClear = StreamController<String>();
+
   /// Streams
-  //Stream<List<CartModel>> get clear => _cartFetcher.stream;
+
   Stream<List<CartModel>> get allCartProducts => _cartFetcher.stream;
-  final _cartFetcher = PublishSubject<List<CartModel>>();
+  final _cartFetcher = BehaviorSubject<List<CartModel>>();
 
   CartBloc() {
     cartItemAddition.stream.listen(handleItemAdd);
     cartItemSubtraction.stream.listen(handleItemRem);
+    cartItemClear.stream.listen(clearCart);
   }
 
   fetchAllCartProduct() async {
@@ -44,7 +48,7 @@ class CartBloc {
     _cartFetcher.sink.add(cartModel);
   }
 
-  void clearCart() async {
+  void clearCart(String id) async {
     List<CartModel> cartModel = await _repository.cartClear();
     _cartFetcher.sink.add(cartModel);
   }
@@ -52,5 +56,6 @@ class CartBloc {
   dispose() async {
     cartItemAddition.close();
     cartItemSubtraction.close();
+    cartItemClear.close();
   }
 }
