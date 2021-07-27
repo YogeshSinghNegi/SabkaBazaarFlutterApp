@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_snack_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
 
@@ -66,7 +67,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    _getItemListWidget(),
+                    _getItemListWidget(context),
                     SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -136,7 +137,10 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.pink.shade800),
                       ),
-                      onPressed: () => {widget.nonEmptyCartBloc.clearCart()},
+                      onPressed: () => {
+                        widget.nonEmptyCartBloc.clearCart(),
+                      AppSnackBar.showSnackBar(context, 'Order is placed Successfully', 10000)
+                        },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
@@ -171,7 +175,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
     );
   }
 
-  Column _getItemListWidget() {
+  Column _getItemListWidget(BuildContext context) {
     return Column(
         children: widget.cartList
             .map((element) => Container(
@@ -218,7 +222,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       borderRadius: 5,
                                       onPressed: () => {
                                         widget.nonEmptyCartBloc.substraction
-                                            .add(element.productId ?? "")
+                                            .add(element.productId ?? ""),
+                                      AppSnackBar.showSnackBar(context, 'Product Removed from cart', 10000)
                                       },
                                     ),
                                   ),
@@ -240,7 +245,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.nonEmptyCartBloc.addition.add(element)
+                                        widget.nonEmptyCartBloc.addition.add(element),
+                                      AppSnackBar.showSnackBar(context, 'Product Added to cart', 10000)
                                       },
                                     ),
                                   ),
