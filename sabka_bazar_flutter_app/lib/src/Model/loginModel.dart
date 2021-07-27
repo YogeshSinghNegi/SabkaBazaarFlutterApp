@@ -22,4 +22,28 @@ class LoginModel {
     data['cartCount'] = this.cartCount;
     return data;
   }
+
+  static Map<String, dynamic> toSingUpJson(
+    String firstName,
+    String lastName,
+    String email,
+    String password,
+  ) {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['email'] = email;
+    data['password'] = password;
+    data['firstname'] = firstName;
+    data['lastname'] = lastName;
+    return data;
+  }
+
+  static Map<String, dynamic> toLoginJson(
+    String email,
+    String password,
+  ) {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['email'] = email;
+    data['password'] = password;
+    return data;
+  }
 }
