@@ -50,7 +50,7 @@ class EmptyCartScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                 child: AppButton(
                   buttonText: 'Start Shopping',
-                  onPressed: () => {},
+                  onPressed: () => Navigator.pop(context),
                   borderRadius: 5,
                 ),
               ),

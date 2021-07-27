@@ -17,12 +17,9 @@ class NonEmptyCartScreen extends StatefulWidget {
 
   @override
   _NonEmptyCartScreenState createState() => _NonEmptyCartScreenState();
-
 }
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
-
-
 
   @override
   Widget build(BuildContext context) {

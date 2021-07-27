@@ -11,6 +11,7 @@ class ApiProvider {
   Client client = Client();
   final _baseUrl = "https://sabaka-bazzar.azurewebsites.net/sabakabazzar";
 
+
   Future<List<OfferModel>> fetchOfferList() async {
     Response response;
     if (_baseUrl != "") {
@@ -98,6 +99,9 @@ class ApiProvider {
           'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
     };
     var body = json.encode(productInfo.toJson());
+    print("------------------");
+    print(body);
+    print("------------------");
     final response = await client.post(Uri.parse("$_baseUrl/cart/addToCart"),
         headers: headers, body: body);
 
