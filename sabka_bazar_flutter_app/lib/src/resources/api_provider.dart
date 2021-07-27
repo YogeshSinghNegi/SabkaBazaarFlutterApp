@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' show Client, Response;
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/categoryModel.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/loginModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 
@@ -122,6 +123,28 @@ class ApiProvider {
       return tagObs;
     } else {
       throw Exception('Failed delete  product to cart');
+    }
+  }
+
+  Future<LoginModel> hitLogin(Map<String, String> params) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Cookie':
+          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
+    };
+
+    final String queryString = Uri(queryParameters: params).query;
+    final String uriString = "$_baseUrl/users/login/" + '?' + queryString;
+    final response = await client.post(Uri.parse(uriString), headers: headers);
+
+    if (response.statusCode == 200) {
+      return LoginModel.fromJson(jsonDecode(response.body));
+    } else {
+      return LoginModel(
+        response: 'Login failed',
+        responseMessage: 'Internal Server Error',
+        cartCount: 0,
+      );
     }
   }
 }
