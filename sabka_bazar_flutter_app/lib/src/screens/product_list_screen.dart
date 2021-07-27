@@ -45,7 +45,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: MyAppBar(),
       body: Column(
         children: [
-          SizedBox(height: 20),
           Container(
             child: CategoryTitleWidget(
               title: widget.categoryName,
@@ -57,9 +56,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
               stream: bloc.allProducts,
               builder: (context, AsyncSnapshot<List<ProductModel>> snapshot) {
                 if (snapshot.hasData) {
+                  if (snapshot.data!.length == 0)
+                    return Center(
+                        child: Text(
+                      'No products available for this category',
+                    ));
                   return _getProductListView(snapshot);
                 } else if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
+                  return Center(child: Text(snapshot.error.toString()));
                 }
                 return Center(child: CircularProgressIndicator());
               },
@@ -86,7 +90,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               children: [
                 Text(
                   data[index].name.toString(),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -101,12 +105,13 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       height: 150,
                     ),
                     SizedBox(height: 30),
-                    Expanded(
+                    Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
                             color: Colors.grey.shade200,
                             child: Text(
                               data[index].description.toString(),

@@ -12,8 +12,10 @@ class CartScreenContainer extends StatefulWidget {
   static const String routName = "/cart_screen";
   final ProductModel? productFromProductList;
 
-  const CartScreenContainer({Key? key, this.productFromProductList})
-      : super(key: key);
+  const CartScreenContainer({
+    Key? key,
+    this.productFromProductList,
+  }) : super(key: key);
 
   @override
   _CartScreenContainerState createState() => _CartScreenContainerState();
