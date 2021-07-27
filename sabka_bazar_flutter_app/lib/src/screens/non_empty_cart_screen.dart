@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/components/app_snack_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
+import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 
 class NonEmptyCartScreen extends StatefulWidget {
   final List<CartModel> cartList;
@@ -138,7 +138,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       ),
                       onPressed: () => {
                         widget.nonEmptyCartBloc.clearCart(),
-                        AppSnackBar.showSnackBar(
+                        AppUtilClass.showSnackBar(
                             context, 'Order is placed Successfully', 2)
                       },
                       child: Padding(
@@ -223,7 +223,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       onPressed: () => {
                                         widget.nonEmptyCartBloc.substraction
                                             .add(element.productId ?? ""),
-                                        AppSnackBar.showSnackBar(context,
+                                        AppUtilClass.showSnackBar(context,
                                             'Product Removed from cart', 2)
                                       },
                                     ),
@@ -248,7 +248,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       onPressed: () => {
                                         widget.nonEmptyCartBloc.addition
                                             .add(element),
-                                        AppSnackBar.showSnackBar(
+                                        AppUtilClass.showSnackBar(
                                             context, 'Product Added to cart', 2)
                                       },
                                     ),

@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/loginModel.dart';
 import 'package:sabka_bazar_flutter_app/src/bloc/login_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
-import 'package:sabka_bazar_flutter_app/src/components/app_snack_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/validation/field_validation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routName = "/login";
@@ -170,27 +169,22 @@ class _LoginScreenState extends State<LoginScreen> {
     return validCount == 2;
   }
 
-  Future<void> _saveUserDataInPreferences() async {
-    //TODO: this is how we can save information is user default after successful login/signup
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // int counter = (prefs.getInt('counter') ?? 0) + 1;
-    // print('Pressed $counter times.');
-    // await prefs.setInt('counter', counter);
-  }
-
   Future<void> _loginBtnTapped() async {
     if (_isLoginValid()) {
-      AppSnackBar.showSnackBar(context, 'Logging...', 10000);
+      AppUtilClass.showSnackBar(context, 'Logging...', 10000);
       final params = {
         'email': _emailController.text.trim(),
         'password': _passwordController.text.trim(),
       };
       LoginModel result = await _bloc.hitLoginAPI(params);
-      AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
-      if (result.response.toString().toLowerCase() == 'success')
+      AppUtilClass.showSnackBar(context, result.responseMessage.toString(), 5);
+      if (result.response.toString().toLowerCase() == 'success') {
+        AppUtilClass.saveCartCount(result.cartCount ?? 0);
         Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+      }
     } else {
-      AppSnackBar.showSnackBar(context, 'One or more field(s) is incorrect', 5);
+      AppUtilClass.showSnackBar(
+          context, 'One or more field(s) is incorrect', 5);
     }
     //TODO: Hit Login API here
     // _saveUserDataInPreferences();

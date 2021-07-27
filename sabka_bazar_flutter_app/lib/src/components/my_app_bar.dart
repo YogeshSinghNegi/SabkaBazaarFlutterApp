@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/cart_screen_container.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -65,12 +66,20 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 30,
                   ),
                 ),
-                Text(
-                  "0 Items",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                  ),
+                FutureBuilder(
+                  future: AppUtilClass.getCartCount(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Container();
+                    }
+                    return Text(
+                      AppUtilClass.getTextNoOfItemInCart(snapshot.data as int),
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

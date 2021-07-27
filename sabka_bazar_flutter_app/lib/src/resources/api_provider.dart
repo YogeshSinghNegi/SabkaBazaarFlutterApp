@@ -9,7 +9,6 @@ import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 
 class ApiProvider {
-
   Client client = Client();
   final _baseUrl = "https://sabaka-bazzar.azurewebsites.net/";
   var headers = {
@@ -20,21 +19,27 @@ class ApiProvider {
 
   // API: Login
   Future<LoginModel> hitLogin(Map<String, String> params) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie':
-          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
-    };
-
-    final String queryString = Uri(queryParameters: params).query;
-    final String uriString = "$_baseUrl/users/login/" + '?' + queryString;
-    final response = await client.post(Uri.parse(uriString), headers: headers);
+    final body = json.encode(params);
+    final response = await client.post(
+      Uri.parse("$_baseUrl/users/login/"),
+      headers: headers,
+      body: body,
+    );
 
     if (response.statusCode == 200) {
       return LoginModel.fromJson(jsonDecode(response.body));
+    } else if (response.statusCode == 404) {
+      final jsonResponse = jsonDecode(response.body);
+      return LoginModel(
+        response: 'failure',
+        responseMessage: jsonResponse['message'].toString().trim().isEmpty
+            ? 'Internal Server Error'
+            : jsonResponse['message'],
+        cartCount: 0,
+      );
     } else {
       return LoginModel(
-        response: 'Login failed',
+        response: 'failure',
         responseMessage: response.reasonPhrase.toString().trim().isEmpty
             ? 'Internal Server Error'
             : response.reasonPhrase,
@@ -43,13 +48,8 @@ class ApiProvider {
     }
   }
 
+  // API: SingUp
   Future<LoginModel> hitSignup(Map<String, dynamic> params) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie':
-          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
-    };
-
     final body = json.encode(params);
     final response = await client.post(
       Uri.parse("$_baseUrl/users/register/"),
@@ -70,8 +70,7 @@ class ApiProvider {
     }
   }
 
-// API: OfferList
-
+  // API: OfferList
   Future<List<OfferModel>> fetchOfferList() async {
     Response response;
     if (_baseUrl != "") {
@@ -91,8 +90,7 @@ class ApiProvider {
     }
   }
 
-// API: CategoryList
-
+  // API: CategoryList
   Future<List<CategoryModel>> fetchCategoryList() async {
     Response response;
     if (_baseUrl != "") {
@@ -113,8 +111,7 @@ class ApiProvider {
     }
   }
 
-// API: ProductList
-
+  // API: ProductList
   Future<List<ProductModel>> fetchProductList(String categoryId) async {
     Response response;
     if (_baseUrl != "") {
@@ -138,8 +135,7 @@ class ApiProvider {
     }
   }
 
-// API: CartList
-
+  // API: CartList
   Future<List<CartModel>> fetchCartList() async {
     Response response;
     if (_baseUrl != "") {
@@ -161,8 +157,7 @@ class ApiProvider {
     }
   }
 
-// API: AddToCart
-
+  // API: AddToCart
   Future<List<CartModel>> fetchCartByAdd(CartModel productInfo) async {
     var body = json.encode(productInfo.toJson());
     final response = await client.post(
@@ -180,8 +175,7 @@ class ApiProvider {
     }
   }
 
-// API: DeleteToCart
-
+  // API: DeleteToCart
   Future<List<CartModel>> fetchCartByDelete(String productId) async {
     final response = await client.delete(Uri.parse(
         _baseUrl + "sabakabazzar/cart/deleteToCart?productId=$productId"));
@@ -196,8 +190,7 @@ class ApiProvider {
     }
   }
 
-// API: ClearCart
-
+  // API: ClearCart
   Future<List<CartModel>> clearCart() async {
     final response = await client
         .delete(Uri.parse(_baseUrl + "sabakabazzar/cart/clearCart"));
