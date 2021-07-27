@@ -22,7 +22,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final bloc = LoginSignupBloc();
+  final _bloc = LoginSignupBloc();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    bloc.dispose();
+    _bloc.dispose();
   }
 
   @override
@@ -184,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
         'email': _emailController.text.trim(),
         'password': _passwordController.text.trim(),
       };
-      LoginModel result = await bloc.hitLoginSignup(params);
+      LoginModel result = await _bloc.hitLoginAPI(params);
       AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
       if (result.response.toString().toLowerCase() == 'success')
         Navigator.of(context).pushReplacementNamed(HomeScreen.routName);

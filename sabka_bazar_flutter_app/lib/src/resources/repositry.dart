@@ -13,7 +13,8 @@ class Repository {
   // Banner  Api
   Future<List<OfferModel>> fetchAllOffers() => apiProvider.fetchOfferList();
   // Category Api
-  Future<List<CategoryModel>> fetchAllCategory() => apiProvider.fetchCategoryList();
+  Future<List<CategoryModel>> fetchAllCategory() =>
+      apiProvider.fetchCategoryList();
   // Product Api
   Future<List<ProductModel>> fetchAllProducts(String categoryId) =>
       apiProvider.fetchProductList(categoryId);
@@ -23,12 +24,14 @@ class Repository {
   Future<List<CartModel>> cartProductAdd(CartModel productInfo) =>
       apiProvider.fetchCartByAdd(productInfo);
   // Delete Cart Api
-  Future<List<CartModel>> cartProductDelete(String productId) => apiProvider.fetchCartByDelete(productId);
+  Future<List<CartModel>> cartProductDelete(String productId) =>
+      apiProvider.fetchCartByDelete(productId);
   // Clear Cart Api
-  Future<List<CartModel>> cartClear() =>apiProvider.clearCart();
+  Future<List<CartModel>> cartClear() => apiProvider.clearCart();
   // Login API
   Future<LoginModel> hitLogin(Map<String, String> params) =>
       apiProvider.hitLogin(params);
-
+  // Signup API
+  Future<LoginModel> hitSignup(Map<String, dynamic> params) =>
+      apiProvider.hitSignup(params);
 }
-

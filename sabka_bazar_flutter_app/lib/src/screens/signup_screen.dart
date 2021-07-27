@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/loginModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/login_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_snack_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
@@ -18,6 +21,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final _bloc = LoginSignupBloc();
+
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -55,6 +60,7 @@ class _SignupScreenState extends State<SignupScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _bloc.dispose();
   }
 
   @override
@@ -243,8 +249,26 @@ class _SignupScreenState extends State<SignupScreen> {
     Navigator.of(context).pushReplacementNamed(LoginScreen.routName);
   }
 
-  void _signupBtnTapped() {
-    if (_isLoginValid())
-      Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+  Future<void> _signupBtnTapped() async {
+    if (_isLoginValid()) {
+      AppSnackBar.showSnackBar(context, 'Signing...', 10000);
+
+      String firstNameText = _firstNameController.text.trim();
+      String lastNameText = _lastNameController.text.trim();
+      String emailText = _emailController.text.trim();
+      String passwordText = _passwordController.text.trim();
+
+      LoginModel result = await _bloc.hitSignupAPI(LoginModel.toSingUpJson(
+        firstNameText,
+        lastNameText,
+        emailText,
+        passwordText,
+      ));
+      AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
+      if (result.response.toString().toLowerCase() == 'success')
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    } else {
+      AppSnackBar.showSnackBar(context, 'One or more field(s) is incorrect', 5);
+    }
   }
 }

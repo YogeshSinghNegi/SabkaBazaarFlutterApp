@@ -10,8 +10,14 @@ class LoginSignupBloc {
 
   Stream<LoginModel> get hitLogin => _loginFetcher.stream;
 
-  Future<LoginModel> hitLoginSignup(Map<String, String> params) async {
+  Future<LoginModel> hitLoginAPI(Map<String, String> params) async {
     LoginModel loginModel = await _repository.hitLogin(params);
+    _loginFetcher.sink.add(loginModel);
+    return loginModel;
+  }
+
+  Future<LoginModel> hitSignupAPI(Map<String, dynamic> params) async {
+    LoginModel loginModel = await _repository.hitSignup(params);
     _loginFetcher.sink.add(loginModel);
     return loginModel;
   }
