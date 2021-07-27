@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/rxdart.dart' ;
+
+import 'package:rxdart/rxdart.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/resources/repositry.dart';
 
-class CartBloc  {
+class CartBloc {
   final _repository = Repository();
   List<CartModel> cart = [];
 
@@ -24,33 +24,29 @@ class CartBloc  {
     itemSubtractionController.stream.listen(handleItemRem);
   }
 
-
   fetchAllCartProduct() async {
-    List<CartModel> cartModel  = await _repository.fetchAllCartProducts();
+    List<CartModel> cartModel = await _repository.fetchAllCartProducts();
     _cartFetcher.sink.add(cartModel);
   }
 
   ///
   /// Logic for product added to shopping cart.
   ///
-  void handleItemAdd(CartModel item)async {
-    List<CartModel> cartModel  = await _repository.cartProductAdd(item);
+  void handleItemAdd(CartModel item) async {
+    List<CartModel> cartModel = await _repository.cartProductAdd(item);
     _cartFetcher.sink.add(cartModel);
   }
 
   ///
   /// Logic for product removed from shopping cart.
   ///
-  void handleItemRem(String id)async {
-    List<CartModel> cartModel  = await _repository.cartProductDelete(id);
+  void handleItemRem(String id) async {
+    List<CartModel> cartModel = await _repository.cartProductDelete(id);
     _cartFetcher.sink.add(cartModel);
   }
 
   dispose() async {
     itemAdditionController.close();
     itemSubtractionController.close();
-
   }
-
 }
-

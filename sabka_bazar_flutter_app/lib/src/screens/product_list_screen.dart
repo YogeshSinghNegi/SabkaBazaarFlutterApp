@@ -6,9 +6,7 @@ import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
 import 'package:sabka_bazar_flutter_app/src/components/category_title_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
-
-import 'empty_cart_screen.dart';
-import 'non_empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/cart_screen_container.dart';
 
 class ProductListScreen extends StatefulWidget {
   static const String routName = "/product_list";
@@ -115,22 +113,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                        SizedBox(height: 10),
-                        Center(
-                          child: AppButton(
-                            buttonText: "Buy Now @ MRP Rs." +
-                                data[index].price.toString(),
-                            onPressed: () => {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => NonEmptyCartScreen(),
-                                  fullscreenDialog: true,
-                                ),
-                              )
-                            },
+                          SizedBox(height: 10),
+                          Center(
+                            child: AppButton(
+                              buttonText: "Buy Now @ MRP Rs." +
+                                  data[index].price.toString(),
+                              onPressed: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CartScreenContainer(),
+                                    fullscreenDialog: true,
+                                  ),
+                                )
+                              },
+                            ),
                           ),
-                        ),
                         ],
                       ),
                     ),

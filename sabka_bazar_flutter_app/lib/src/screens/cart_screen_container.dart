@@ -1,0 +1,60 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc_provider.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_loader.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/empty_cart_screen.dart';
+import 'package:sabka_bazar_flutter_app/src/screens/non_empty_cart_screen.dart';
+
+class CartScreenContainer extends StatefulWidget {
+  static const String routName = "/cart_screen";
+  const CartScreenContainer({Key? key}) : super(key: key);
+
+  @override
+  _CartScreenContainerState createState() => _CartScreenContainerState();
+}
+
+class _CartScreenContainerState extends State<CartScreenContainer> {
+  late CartBloc newbloc;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    newbloc = CartBlocProvider.of(context);
+    newbloc.fetchAllCartProduct();
+    print("recreated");
+    super.didChangeDependencies();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<CartBloc>('bloc', newbloc));
+  }
+
+  @override
+  void dispose() {
+    newbloc.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: newbloc.allCartProducts,
+      builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
+        if (snapshot.hasData) {
+          return NonEmptyCartScreen(cartList: snapshot.data!, newbloc: newbloc);
+        } else if (snapshot.hasError) {
+          return EmptyCartScreen();
+        }
+        return AppLoader(isShowCrossButton: true);
+      },
+    );
+  }
+}

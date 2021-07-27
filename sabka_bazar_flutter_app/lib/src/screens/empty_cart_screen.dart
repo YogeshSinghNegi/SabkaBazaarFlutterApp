@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 
 class EmptyCartScreen extends StatelessWidget {
-  static const String routName = "/empty_cart";
-
   const EmptyCartScreen({Key? key}) : super(key: key);
 
   @override
