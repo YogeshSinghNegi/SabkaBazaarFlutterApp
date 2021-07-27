@@ -20,9 +20,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-        child: Image.asset(
-          'assets/images/logo_small.png',
-        ),
+        child: Image.asset('assets/images/logo_small.png',
+            semanticLabel: 'Sabka Bazar'),
       ),
       leadingWidth: 90,
       backgroundColor: Colors.white,
@@ -65,11 +64,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 30,
                   ),
                 ),
-                Text(
-                  "0 Items",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
+                Semantics(
+                  label: 'Add to cart',
+                  child: Text(
+                    "0 Items",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ],

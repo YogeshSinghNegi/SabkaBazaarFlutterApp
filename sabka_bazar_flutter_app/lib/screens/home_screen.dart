@@ -179,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             model["bannerImageUrl"].toString(),
             // height: 200,
             width: (MediaQuery.of(context).size.width),
+            semanticLabel: 'Banner image',
           ),
         )
         .toList();

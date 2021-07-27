@@ -30,7 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('assets/images/logo.png'),
+              Image.asset('assets/images/logo.png',
+                  semanticLabel: 'sabka bazar'),
             ],
           ),
         ),
