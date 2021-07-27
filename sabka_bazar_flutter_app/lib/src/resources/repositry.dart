@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/categoryModel.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/loginModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/offerModel.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 
@@ -19,11 +20,15 @@ class Repository {
   // Cart Api
   Future<List<CartModel>> fetchAllCartProducts() => apiProvider.fetchCartList();
   //Add to Cart Api
-  Future<List<CartModel>> cartProductAdd(CartModel productInfo) => apiProvider.fetchCartByAdd(productInfo);
+  Future<List<CartModel>> cartProductAdd(CartModel productInfo) =>
+      apiProvider.fetchCartByAdd(productInfo);
   // Delete Cart Api
   Future<List<CartModel>> cartProductDelete(String productId) => apiProvider.fetchCartByDelete(productId);
   // Clear Cart Api
   Future<List<CartModel>> cartClear() =>apiProvider.clearCart();
+  // Login API
+  Future<LoginModel> hitLogin(Map<String, String> params) =>
+      apiProvider.hitLogin(params);
 
 }
 

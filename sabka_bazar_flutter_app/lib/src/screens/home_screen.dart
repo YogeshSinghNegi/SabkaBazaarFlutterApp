@@ -108,12 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Image> _getOfferImageWidget(AsyncSnapshot<List<OfferModel>> snapshot) {
     var model123 = snapshot.data!;
     return model123
-        .map(
-          (model) => Image.asset(
-            model.bannerImageUrl.toString(),
-            width: (MediaQuery.of(context).size.width),
-          ),
-        )
+        .map((model) => Image.asset(
+              model.bannerImageUrl.toString(),
+              width: (MediaQuery.of(context).size.width),
+            ))
         .toList();
   }
 
@@ -125,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
       itemCount: snapshot.data!.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
+          padding: EdgeInsets.fromLTRB(5, 20, 5, 20),
           child: Row(
             textDirection:
                 index % 2 == 0 ? TextDirection.ltr : TextDirection.rtl,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sabka_bazar_flutter_app/src/Model/loginModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/login_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
+import 'package:sabka_bazar_flutter_app/src/components/app_snack_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_text_field.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
-import 'package:sabka_bazar_flutter_app/src/components/show_alert_dialog.dart';
 import 'package:sabka_bazar_flutter_app/src/components/unfilled_app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/home_screen.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/signup_screen.dart';
@@ -20,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final bloc = LoginSignupBloc();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -42,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    bloc.dispose();
   }
 
   @override
@@ -173,24 +177,36 @@ class _LoginScreenState extends State<LoginScreen> {
     // await prefs.setInt('counter', counter);
   }
 
-  void _loginBtnTapped() {
+  Future<void> _loginBtnTapped() async {
     if (_isLoginValid()) {
-      //TODO: Hit Login API here
-      _saveUserDataInPreferences();
-
-      //TODO: to show custom dialog
-      showMyDialog(context, 'title', [
-        Text('text1')
-      ], [
-        TextButton(
-          child: Text('Approve'),
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
-          },
-        ),
-      ]);
+      AppSnackBar.showSnackBar(context, 'Logging...', 10000);
+      final params = {
+        'email': _emailController.text.trim(),
+        'password': _passwordController.text.trim(),
+      };
+      LoginModel result = await bloc.hitLoginSignup(params);
+      AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
+      if (result.response.toString().toLowerCase() == 'success')
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    } else {
+      AppSnackBar.showSnackBar(context, 'One or more field(s) is incorrect', 5);
     }
+    //TODO: Hit Login API here
+    // _saveUserDataInPreferences();
+
+    //TODO: to show custom dialog
+    //   showMyDialog(context, 'title', [
+    //     Text('text1')
+    //   ], [
+    //     TextButton(
+    //       child: Text('Approve'),
+    //       onPressed: () {
+    //         Navigator.of(context).pop();
+    //
+    //       },
+    //     ),
+    //   ]);
+    // }
   }
 
   void _signupBtnTapped() {
