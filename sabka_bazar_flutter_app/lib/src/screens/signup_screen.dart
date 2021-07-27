@@ -253,18 +253,16 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_isLoginValid()) {
       AppUtilClass.showSnackBar(context, 'Signing...', 10000);
 
-      String firstNameText = _firstNameController.text.trim();
-      String lastNameText = _lastNameController.text.trim();
-      String emailText = _emailController.text.trim();
-      String passwordText = _passwordController.text.trim();
+      final paraData = {
+        'firstname': _firstNameController.text.trim(),
+        'lastname': _lastNameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'password': _passwordController.text.trim(),
+      };
 
-      LoginModel result = await _bloc.hitSignupAPI(LoginModel.toSingUpJson(
-        firstNameText,
-        lastNameText,
-        emailText,
-        passwordText,
-      ));
+      LoginModel result = await _bloc.hitSignupAPI(paraData);
       AppUtilClass.showSnackBar(context, result.responseMessage.toString(), 5);
+
       if (result.response.toString().toLowerCase() == 'success') {
         AppUtilClass.saveCartCount(result.cartCount ?? 0);
         Navigator.of(context).pushReplacementNamed(HomeScreen.routName);

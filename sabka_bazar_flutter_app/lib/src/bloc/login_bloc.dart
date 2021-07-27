@@ -16,7 +16,7 @@ class LoginSignupBloc {
     return loginModel;
   }
 
-  Future<LoginModel> hitSignupAPI(Map<String, dynamic> params) async {
+  Future<LoginModel> hitSignupAPI(Map<String, String> params) async {
     LoginModel loginModel = await _repository.hitSignup(params);
     _loginFetcher.sink.add(loginModel);
     return loginModel;

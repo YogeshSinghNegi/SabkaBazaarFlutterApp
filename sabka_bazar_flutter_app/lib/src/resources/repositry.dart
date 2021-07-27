@@ -32,7 +32,6 @@ class Repository {
   Future<LoginModel> hitLogin(Map<String, String> params) =>
       apiProvider.hitLogin(params);
   // Signup API
-  Future<LoginModel> hitSignup(Map<String, dynamic> params) =>
+  Future<LoginModel> hitSignup(Map<String, String> params) =>
       apiProvider.hitSignup(params);
-
 }
