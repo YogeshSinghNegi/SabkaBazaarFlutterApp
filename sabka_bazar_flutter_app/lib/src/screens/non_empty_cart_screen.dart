@@ -149,7 +149,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                             ),
                             Expanded(child: Container()),
                             Text(
-                              'Rs.' + "",
+                              'Rs.' + _getTotalCart(),
                               style: TextStyle(
                                 fontSize: 18,
                               ),
@@ -287,5 +287,13 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
       numberOfItemsCart = '(${widget.cartList.length} items)';
     }
     return numberOfItemsCart;
+  }
+
+  String _getTotalCart() {
+    var sum = 0;
+    if (widget.cartList.length > 1) {
+      widget.cartList.forEach((e) => sum += ((e.qty ?? 1) * (e.price ?? 0) ));
+    }
+   return sum.toString();
   }
 }

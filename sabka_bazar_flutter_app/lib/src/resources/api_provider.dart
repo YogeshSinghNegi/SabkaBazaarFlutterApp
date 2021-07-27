@@ -139,7 +139,7 @@ class ApiProvider {
       throw Exception('Failed delete  product to cart');
     }
   }
-  
+
   Future<LoginModel> hitLogin(Map<String, String> params) async {
     var headers = {
       'Content-Type': 'application/json',
