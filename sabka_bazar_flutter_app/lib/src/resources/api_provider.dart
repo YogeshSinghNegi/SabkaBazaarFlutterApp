@@ -49,7 +49,7 @@ class ApiProvider {
   }
 
   // API: SingUp
-  Future<LoginModel> hitSignup(Map<String, dynamic> params) async {
+  Future<LoginModel> hitSignup(Map<String, String> params) async {
     final body = json.encode(params);
     final response = await client.post(
       Uri.parse("$_baseUrl/users/register/"),
