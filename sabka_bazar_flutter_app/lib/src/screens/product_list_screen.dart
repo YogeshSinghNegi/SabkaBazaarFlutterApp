@@ -122,7 +122,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => CartScreenContainer( productFromProductList:data[index]),
+                                    builder: (context) => CartScreenContainer(
+                                        productFromProductList: data[index]),
                                     fullscreenDialog: true,
                                   ),
                                 )

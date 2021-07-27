@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'cart_bloc.dart';
 export 'cart_bloc.dart';
 
-class CartBlocProvider extends InheritedWidget{
+class CartBlocProvider extends InheritedWidget {
   final CartBloc bloc;
 
-  CartBlocProvider({ Key? key,required Widget child})
+  CartBlocProvider({Key? key, required Widget child})
       : bloc = CartBloc(),
         super(key: key, child: child);
-
-
 
   @override
   bool updateShouldNotify(_) {
@@ -17,6 +15,8 @@ class CartBlocProvider extends InheritedWidget{
   }
 
   static CartBloc of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType<CartBlocProvider>() as CartBlocProvider).bloc;
+    return (context.dependOnInheritedWidgetOfExactType<CartBlocProvider>()
+            as CartBlocProvider)
+        .bloc;
   }
 }

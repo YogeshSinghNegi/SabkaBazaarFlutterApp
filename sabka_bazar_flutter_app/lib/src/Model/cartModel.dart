@@ -7,20 +7,18 @@ class CartModel {
   int? stock;
   String? category;
   String? sku;
-  int? qty = 1 ;
+  int? qty = 1;
 
   CartModel(
-      {
-        this.productId,
-        this.name,
-        this.description,
-        this.imageURL,
-        this.price,
-        this.stock,
-        this.category,
-        this.sku,
-        this.qty
-      });
+      {this.productId,
+      this.name,
+      this.description,
+      this.imageURL,
+      this.price,
+      this.stock,
+      this.category,
+      this.sku,
+      this.qty});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     productId = json['productId'];
@@ -31,7 +29,7 @@ class CartModel {
     stock = json['stock'];
     category = json['category'];
     sku = json['sku'];
-    qty = json['qty'] ?? 1 ;
+    qty = json['qty'] ?? 1;
   }
 
   Map<String, dynamic> toJson() {

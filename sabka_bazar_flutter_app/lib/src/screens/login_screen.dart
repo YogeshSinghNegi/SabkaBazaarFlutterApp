@@ -178,19 +178,20 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _loginBtnTapped() async {
-    if (_isLoginValid()) {
-      AppSnackBar.showSnackBar(context, 'Logging...', 10000);
-      final params = {
-        'email': _emailController.text.trim(),
-        'password': _passwordController.text.trim(),
-      };
-      LoginModel result = await bloc.hitLoginSignup(params);
-      AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
-      if (result.response.toString().toLowerCase() == 'success')
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
-    } else {
-      AppSnackBar.showSnackBar(context, 'One or more field(s) is incorrect', 5);
-    }
+    Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    // if (_isLoginValid()) {
+    //   AppSnackBar.showSnackBar(context, 'Logging...', 10000);
+    //   final params = {
+    //     'email': _emailController.text.trim(),
+    //     'password': _passwordController.text.trim(),
+    //   };
+    //   LoginModel result = await bloc.hitLoginSignup(params);
+    //   AppSnackBar.showSnackBar(context, result.responseMessage.toString(), 5);
+    //   if (result.response.toString().toLowerCase() == 'success')
+    //     Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+    // } else {
+    //   AppSnackBar.showSnackBar(context, 'One or more field(s) is incorrect', 5);
+    // }
     //TODO: Hit Login API here
     // _saveUserDataInPreferences();
 

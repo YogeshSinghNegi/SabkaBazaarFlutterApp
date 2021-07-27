@@ -6,15 +6,12 @@ import 'package:sabka_bazar_flutter_app/src/resources/repositry.dart';
 class CartBloc {
   final _repository = Repository();
 
-
   /// Sinks
   Sink<CartModel> get addition => cartItemAddition.sink;
   final cartItemAddition = StreamController<CartModel>();
 
   Sink<String> get substraction => cartItemSubtraction.sink;
   final cartItemSubtraction = StreamController<String>();
-
-
 
   /// Streams
   //Stream<List<CartModel>> get clear => _cartFetcher.stream;
@@ -49,7 +46,7 @@ class CartBloc {
 
   void clearCart() async {
     List<CartModel> cartModel = await _repository.cartClear();
-      _cartFetcher.sink.add(cartModel);
+    _cartFetcher.sink.add(cartModel);
   }
 
   dispose() async {

@@ -10,9 +10,10 @@ import 'package:sabka_bazar_flutter_app/src/screens/non_empty_cart_screen.dart';
 
 class CartScreenContainer extends StatefulWidget {
   static const String routName = "/cart_screen";
-  final ProductModel? productFromProductList ;
+  final ProductModel? productFromProductList;
 
-  const CartScreenContainer({Key? key, this.productFromProductList}) : super(key: key);
+  const CartScreenContainer({Key? key, this.productFromProductList})
+      : super(key: key);
 
   @override
   _CartScreenContainerState createState() => _CartScreenContainerState();
@@ -29,9 +30,12 @@ class _CartScreenContainerState extends State<CartScreenContainer> {
   @override
   void didChangeDependencies() {
     newBloc = CartBlocProvider.of(context);
-    if( widget.productFromProductList != null){
-      newBloc.addition.add(CartModel.fromJson(widget.productFromProductList!.toJson()));
-    }else{ newBloc.fetchAllCartProduct();}
+    if (widget.productFromProductList != null) {
+      newBloc.addition
+          .add(CartModel.fromJson(widget.productFromProductList!.toJson()));
+    } else {
+      newBloc.fetchAllCartProduct();
+    }
 
     print("recreated");
     super.didChangeDependencies();
@@ -52,13 +56,14 @@ class _CartScreenContainerState extends State<CartScreenContainer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: newBloc.allCartProducts ,
+      stream: newBloc.allCartProducts,
       builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.isEmpty){
+          if (snapshot.data!.isEmpty) {
             return EmptyCartScreen();
           }
-          return NonEmptyCartScreen(cartList: snapshot.data!, nonEmptyCartBloc: newBloc);
+          return NonEmptyCartScreen(
+              cartList: snapshot.data!, nonEmptyCartBloc: newBloc);
         } else if (snapshot.hasError) {
           return EmptyCartScreen();
         }

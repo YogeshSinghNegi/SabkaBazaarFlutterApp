@@ -10,7 +10,37 @@ import 'package:sabka_bazar_flutter_app/src/Model/productModel.dart';
 class ApiProvider {
   Client client = Client();
   final _baseUrl = "https://sabaka-bazzar.azurewebsites.net/sabakabazzar";
+  var headers = {
+    'Content-Type': 'application/json',
+    'Cookie':
+        'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
+  };
 
+  // API: Login
+
+  Future<LoginModel> hitLogin(Map<String, String> params) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Cookie':
+          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
+    };
+
+    final String queryString = Uri(queryParameters: params).query;
+    final String uriString = "$_baseUrl/users/login/" + '?' + queryString;
+    final response = await client.post(Uri.parse(uriString), headers: headers);
+
+    if (response.statusCode == 200) {
+      return LoginModel.fromJson(jsonDecode(response.body));
+    } else {
+      return LoginModel(
+        response: 'Login failed',
+        responseMessage: 'Internal Server Error',
+        cartCount: 0,
+      );
+    }
+  }
+
+// API: OfferList
 
   Future<List<OfferModel>> fetchOfferList() async {
     Response response;
@@ -31,6 +61,8 @@ class ApiProvider {
     }
   }
 
+// API: CategoryList
+
   Future<List<CategoryModel>> fetchCategoryList() async {
     Response response;
     if (_baseUrl != "") {
@@ -49,6 +81,8 @@ class ApiProvider {
       throw Exception('Failed to load post');
     }
   }
+
+// API: ProductList
 
   Future<List<ProductModel>> fetchProductList(String categoryId) async {
     Response response;
@@ -72,6 +106,8 @@ class ApiProvider {
     }
   }
 
+// API: CartList
+
   Future<List<CartModel>> fetchCartList() async {
     Response response;
     if (_baseUrl != "") {
@@ -92,16 +128,10 @@ class ApiProvider {
     }
   }
 
+// API: AddToCart
+
   Future<List<CartModel>> fetchCartByAdd(CartModel productInfo) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie':
-          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
-    };
     var body = json.encode(productInfo.toJson());
-    print("------------------");
-    print(body);
-    print("------------------");
     final response = await client.post(Uri.parse("$_baseUrl/cart/addToCart"),
         headers: headers, body: body);
 
@@ -114,6 +144,8 @@ class ApiProvider {
       throw Exception('Failed add product to cart');
     }
   }
+
+// API: DeleteToCart
 
   Future<List<CartModel>> fetchCartByDelete(String productId) async {
     final response = await client
@@ -129,37 +161,15 @@ class ApiProvider {
     }
   }
 
+// API: ClearCart
+
   Future<List<CartModel>> clearCart() async {
-    final response = await client
-        .delete(Uri.parse("$_baseUrl/cart/clearCart"));
+    final response = await client.delete(Uri.parse("$_baseUrl/cart/clearCart"));
 
     if (response.statusCode == 200) {
       return [];
     } else {
       throw Exception('Failed delete  product to cart');
-    }
-  }
-
-  Future<LoginModel> hitLogin(Map<String, String> params) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Cookie':
-          'ARRAffinity=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17; ARRAffinitySameSite=22a7daa836b64a8ce56c907737553d08297ff2e76cd06a1f52c29956b9a85c17'
-    };
-
-    final String queryString = Uri(queryParameters: params).query;
-    final String uriString = "$_baseUrl/users/login/" + '?' + queryString;
-    final response = await client.post(Uri.parse(uriString), headers: headers);
-
-    if (response.statusCode == 200) {
-      return LoginModel.fromJson(jsonDecode(response.body));
-    } else {
-      return LoginModel(
-        response: 'Login failed',
-        responseMessage: 'Internal Server Error',
-        cartCount: 0,
-      );
-
     }
   }
 }

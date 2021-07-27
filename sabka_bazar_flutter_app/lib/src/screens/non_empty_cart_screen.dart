@@ -22,7 +22,6 @@ class NonEmptyCartScreen extends StatefulWidget {
 }
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,8 +138,9 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                       ),
                       onPressed: () => {
                         widget.nonEmptyCartBloc.clearCart(),
-                      AppSnackBar.showSnackBar(context, 'Order is placed Successfully', 10000)
-                        },
+                        AppSnackBar.showSnackBar(
+                            context, 'Order is placed Successfully', 2)
+                      },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
@@ -223,7 +223,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       onPressed: () => {
                                         widget.nonEmptyCartBloc.substraction
                                             .add(element.productId ?? ""),
-                                      AppSnackBar.showSnackBar(context, 'Product Removed from cart', 10000)
+                                        AppSnackBar.showSnackBar(context,
+                                            'Product Removed from cart', 2)
                                       },
                                     ),
                                   ),
@@ -245,8 +246,10 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.nonEmptyCartBloc.addition.add(element),
-                                      AppSnackBar.showSnackBar(context, 'Product Added to cart', 10000)
+                                        widget.nonEmptyCartBloc.addition
+                                            .add(element),
+                                        AppSnackBar.showSnackBar(
+                                            context, 'Product Added to cart', 2)
                                       },
                                     ),
                                   ),
@@ -268,7 +271,10 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'Rs.' +( (element.price ?? 0) * (element.qty ?? 1)).toString(),
+                                      'Rs.' +
+                                          ((element.price ?? 0) *
+                                                  (element.qty ?? 1))
+                                              .toString(),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                         fontSize: 18,
@@ -298,8 +304,8 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
   String _getTotalCart() {
     var sum = 0;
     if (widget.cartList.length > 1) {
-      widget.cartList.forEach((e) => sum += ((e.qty ?? 1) * (e.price ?? 0) ));
+      widget.cartList.forEach((e) => sum += ((e.qty ?? 1) * (e.price ?? 0)));
     }
-   return sum.toString();
+    return sum.toString();
   }
 }
