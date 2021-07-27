@@ -1,27 +1,29 @@
 import 'dart:async';
-
 import 'package:rxdart/rxdart.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
 import 'package:sabka_bazar_flutter_app/src/resources/repositry.dart';
 
 class CartBloc {
   final _repository = Repository();
-  List<CartModel> cart = [];
+
 
   /// Sinks
-  Sink<CartModel> get addition => itemAdditionController.sink;
-  final itemAdditionController = StreamController<CartModel>();
+  Sink<CartModel> get addition => cartItemAddition.sink;
+  final cartItemAddition = StreamController<CartModel>();
 
-  Sink<String> get substraction => itemSubtractionController.sink;
-  final itemSubtractionController = StreamController<String>();
+  Sink<String> get substraction => cartItemSubtraction.sink;
+  final cartItemSubtraction = StreamController<String>();
+
+
 
   /// Streams
+  //Stream<List<CartModel>> get clear => _cartFetcher.stream;
   Stream<List<CartModel>> get allCartProducts => _cartFetcher.stream;
-  final _cartFetcher = BehaviorSubject<List<CartModel>>();
+  final _cartFetcher = PublishSubject<List<CartModel>>();
 
   CartBloc() {
-    itemAdditionController.stream.listen(handleItemAdd);
-    itemSubtractionController.stream.listen(handleItemRem);
+    cartItemAddition.stream.listen(handleItemAdd);
+    cartItemSubtraction.stream.listen(handleItemRem);
   }
 
   fetchAllCartProduct() async {
@@ -45,8 +47,13 @@ class CartBloc {
     _cartFetcher.sink.add(cartModel);
   }
 
+  void clearCart() async {
+    List<CartModel> cartModel = await _repository.cartClear();
+      _cartFetcher.sink.add(cartModel);
+  }
+
   dispose() async {
-    itemAdditionController.close();
-    itemSubtractionController.close();
+    cartItemAddition.close();
+    cartItemSubtraction.close();
   }
 }

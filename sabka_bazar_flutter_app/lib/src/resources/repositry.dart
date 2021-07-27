@@ -9,9 +9,9 @@ import 'api_provider.dart';
 
 class Repository {
   final apiProvider = ApiProvider();
-  // banner  Api
+  // Banner  Api
   Future<List<OfferModel>> fetchAllOffers() => apiProvider.fetchOfferList();
-  // category Api
+  // Category Api
   Future<List<CategoryModel>> fetchAllCategory() => apiProvider.fetchCategoryList();
   // Product Api
   Future<List<ProductModel>> fetchAllProducts(String categoryId) =>
@@ -22,4 +22,8 @@ class Repository {
   Future<List<CartModel>> cartProductAdd(CartModel productInfo) => apiProvider.fetchCartByAdd(productInfo);
   // Delete Cart Api
   Future<List<CartModel>> cartProductDelete(String productId) => apiProvider.fetchCartByDelete(productId);
+  // Clear Cart Api
+  Future<List<CartModel>> cartClear() =>apiProvider.clearCart();
+
 }
+

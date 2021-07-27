@@ -52,13 +52,13 @@ class _CartScreenContainerState extends State<CartScreenContainer> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: newBloc.allCartProducts,
+      stream: newBloc.allCartProducts ,
       builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty){
             return EmptyCartScreen();
           }
-          return NonEmptyCartScreen(cartList: snapshot.data!, emptyCartBloc: newBloc);
+          return NonEmptyCartScreen(cartList: snapshot.data!, nonEmptyCartBloc: newBloc);
         } else if (snapshot.hasError) {
           return EmptyCartScreen();
         }

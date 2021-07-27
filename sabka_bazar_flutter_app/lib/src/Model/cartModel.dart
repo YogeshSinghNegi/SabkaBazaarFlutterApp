@@ -3,11 +3,11 @@ class CartModel {
   String? name;
   String? description;
   String? imageURL;
-  int? price;
+  int? price = 0;
   int? stock;
   String? category;
   String? sku;
-  int qty = 0 ;
+  int? qty = 1 ;
 
   CartModel(
       {
@@ -19,7 +19,7 @@ class CartModel {
         this.stock,
         this.category,
         this.sku,
-        required this.qty
+        this.qty
       });
 
   CartModel.fromJson(Map<String, dynamic> json) {
@@ -27,11 +27,11 @@ class CartModel {
     name = json['name'];
     description = json['description'];
     imageURL = json['imageURL'];
-    price = json['price'];
+    price = json['price'] ?? 0;
     stock = json['stock'];
     category = json['category'];
     sku = json['sku'];
-    qty = json['qty'] ?? 1;
+    qty = json['qty'] ?? 1 ;
   }
 
   Map<String, dynamic> toJson() {

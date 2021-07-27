@@ -1,17 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sabka_bazar_flutter_app/src/Model/cartModel.dart';
+import 'package:sabka_bazar_flutter_app/src/bloc/cart_bloc.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
 import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
 
 class NonEmptyCartScreen extends StatefulWidget {
   final List<CartModel> cartList;
-  final emptyCartBloc;
+  final CartBloc nonEmptyCartBloc;
 
   const NonEmptyCartScreen({
     required this.cartList,
-    required this.emptyCartBloc,
+    required this.nonEmptyCartBloc,
     Key? key,
   }) : super(key: key);
 
@@ -135,7 +136,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Colors.pink.shade800),
                       ),
-                      onPressed: () => {},
+                      onPressed: () => {widget.nonEmptyCartBloc.clearCart()},
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Row(
@@ -148,7 +149,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                             ),
                             Expanded(child: Container()),
                             Text(
-                              'Rs.' + "1212",
+                              'Rs.' + "",
                               style: TextStyle(
                                 fontSize: 18,
                               ),
@@ -216,7 +217,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.emptyCartBloc.substraction
+                                        widget.nonEmptyCartBloc.substraction
                                             .add(element.productId ?? "")
                                       },
                                     ),
@@ -239,7 +240,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.emptyCartBloc.addition.add(element)
+                                        widget.nonEmptyCartBloc.addition.add(element)
                                       },
                                     ),
                                   ),
@@ -261,7 +262,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      'Rs.' + element.price.toString(),
+                                      'Rs.' +( (element.price ?? 0) * (element.qty ?? 1)).toString(),
                                       textAlign: TextAlign.right,
                                       style: TextStyle(
                                         fontSize: 18,

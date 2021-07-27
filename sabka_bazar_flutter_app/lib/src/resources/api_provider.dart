@@ -128,4 +128,16 @@ class ApiProvider {
       throw Exception('Failed delete  product to cart');
     }
   }
+  //cart/clearCart
+
+  Future<List<CartModel>> clearCart() async {
+    final response = await client
+        .delete(Uri.parse("$_baseUrl/cart/clearCart"));
+
+    if (response.statusCode == 200) {
+      return [];
+    } else {
+      throw Exception('Failed delete  product to cart');
+    }
+  }
 }
