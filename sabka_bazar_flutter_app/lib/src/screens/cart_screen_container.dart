@@ -16,7 +16,7 @@ class CartScreenContainer extends StatefulWidget {
 }
 
 class _CartScreenContainerState extends State<CartScreenContainer> {
-  late CartBloc newbloc;
+  late CartBloc newBloc;
 
   @override
   void initState() {
@@ -25,8 +25,8 @@ class _CartScreenContainerState extends State<CartScreenContainer> {
 
   @override
   void didChangeDependencies() {
-    newbloc = CartBlocProvider.of(context);
-    newbloc.fetchAllCartProduct();
+    newBloc = CartBlocProvider.of(context);
+    newBloc.fetchAllCartProduct();
     print("recreated");
     super.didChangeDependencies();
   }
@@ -34,22 +34,22 @@ class _CartScreenContainerState extends State<CartScreenContainer> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<CartBloc>('bloc', newbloc));
+    properties.add(DiagnosticsProperty<CartBloc>('bloc', newBloc));
   }
 
-  @override
-  void dispose() {
-    newbloc.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //  // newBloc.dispose();
+  //   //super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: newbloc.allCartProducts,
+      stream: newBloc.allCartProducts,
       builder: (context, AsyncSnapshot<List<CartModel>> snapshot) {
         if (snapshot.hasData) {
-          return NonEmptyCartScreen(cartList: snapshot.data!, newbloc: newbloc);
+          return NonEmptyCartScreen(cartList: snapshot.data!, emptyCartBloc: newBloc);
         } else if (snapshot.hasError) {
           return EmptyCartScreen();
         }

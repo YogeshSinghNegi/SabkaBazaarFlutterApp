@@ -7,18 +7,23 @@ import 'package:sabka_bazar_flutter_app/src/components/shadow_container.dart';
 
 class NonEmptyCartScreen extends StatefulWidget {
   final List<CartModel> cartList;
-  final newbloc;
+  final emptyCartBloc;
+
   const NonEmptyCartScreen({
     required this.cartList,
-    required this.newbloc,
+    required this.emptyCartBloc,
     Key? key,
   }) : super(key: key);
 
   @override
   _NonEmptyCartScreenState createState() => _NonEmptyCartScreenState();
+
 }
 
 class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +219,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.newbloc.substraction
+                                        widget.emptyCartBloc.substraction
                                             .add(element.productId ?? "")
                                       },
                                     ),
@@ -237,7 +242,7 @@ class _NonEmptyCartScreenState extends State<NonEmptyCartScreen> {
                                       isImageOnly: true,
                                       borderRadius: 5,
                                       onPressed: () => {
-                                        widget.newbloc.addition.add(element)
+                                        widget.emptyCartBloc.addition.add(element)
                                       },
                                     ),
                                   ),
