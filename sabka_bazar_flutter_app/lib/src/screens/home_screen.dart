@@ -8,6 +8,7 @@ import 'package:sabka_bazar_flutter_app/src/components/app_button.dart';
 import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/product_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final bloc = HomeBloc();
   late PageController _controller;
+  int _cartCount = 0;
 
   @override
   void initState() {
@@ -31,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _controller = PageController();
     bloc.fetchAllOffers();
     bloc.fetchAllCategories();
+    _checkCartCount();
   }
 
   @override
@@ -44,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(
+        cartCount: _cartCount,
+        cartCloseAction: () => _checkCartCount(),
+      ),
       body: Column(
         children: [
           Container(
@@ -176,6 +182,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         fullscreenDialog: true,
       ),
-    );
+    ).then((value) => _checkCartCount());
+  }
+
+  void _checkCartCount() {
+    setState(() {
+      AppUtilClass.getCartCount().then((value) => _cartCount = value);
+    });
   }
 }

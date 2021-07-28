@@ -6,10 +6,14 @@ import 'package:sabka_bazar_flutter_app/src/screens/cart_screen.dart';
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isHideCartButton;
   final bool isShowCrossButton;
+  final int cartCount;
+  final Function? cartCloseAction;
 
   const MyAppBar({
     this.isHideCartButton = false,
     this.isShowCrossButton = false,
+    this.cartCount = 0,
+    this.cartCloseAction,
     Key? key,
   }) : super(key: key);
 
@@ -59,7 +63,7 @@ class _MyAppBarState extends State<MyAppBar> {
                     builder: (context) => CartScreen(),
                     fullscreenDialog: true,
                   ),
-                )),
+                ).then((value) => widget.cartCloseAction!())),
             child: Row(
               children: [
                 Padding(
@@ -78,7 +82,9 @@ class _MyAppBarState extends State<MyAppBar> {
                       return Container();
                     }
                     return Text(
-                      AppUtilClass.getTextNoOfItemInCart(snapshot.data as int),
+                      AppUtilClass.getTextNoOfItemInCart(widget.cartCount == 0
+                          ? snapshot.data as int
+                          : widget.cartCount),
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,

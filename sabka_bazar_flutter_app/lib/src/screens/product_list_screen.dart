@@ -6,6 +6,7 @@ import 'package:sabka_bazar_flutter_app/src/components/app_divider.dart';
 import 'package:sabka_bazar_flutter_app/src/components/category_title_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/copyright_widget.dart';
 import 'package:sabka_bazar_flutter_app/src/components/my_app_bar.dart';
+import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/cart_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -25,11 +26,13 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   final bloc = ProductBloc();
+  int _cartCount = 0;
 
   @override
   void initState() {
     super.initState();
     bloc.fetchAllProducts(widget.categoryId);
+    _checkCartCount();
   }
 
   @override
@@ -42,7 +45,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(
+        cartCount: _cartCount,
+        cartCloseAction: () => _checkCartCount(),
+      ),
       body: Column(
         children: [
           Container(
@@ -131,7 +137,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                         productFromProductList: data[index]),
                                     fullscreenDialog: true,
                                   ),
-                                )
+                                ).then((value) => _checkCartCount()),
                               },
                             ),
                           ),
@@ -145,5 +151,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
             ),
           );
         });
+  }
+
+  void _checkCartCount() {
+    setState(() {
+      AppUtilClass.getCartCount().then((value) => _cartCount = value);
+    });
   }
 }
