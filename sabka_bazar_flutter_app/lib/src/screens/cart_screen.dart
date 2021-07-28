@@ -23,11 +23,10 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late CartBloc cartBloc;
-  late  List<CartModel> cartList;
+  late List<CartModel> cartList;
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -419,12 +418,13 @@ class _CartScreenState extends State<CartScreen> {
     if (cartList.length > 1) {
       numberOfItemsCart = '(${cartList.length} items)';
     }
+    AppUtilClass.saveCartCount(cartList.length);
     return numberOfItemsCart;
   }
 
   String _getTotalCart() {
     var sum = 0;
-      cartList.forEach((e) => sum += ((e.qty ?? 1) * (e.price ?? 0)));
+    cartList.forEach((e) => sum += ((e.qty ?? 1) * (e.price ?? 0)));
     return sum.toString();
   }
 

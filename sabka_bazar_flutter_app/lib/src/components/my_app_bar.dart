@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sabka_bazar_flutter_app/src/resources/app_util_class.dart';
 import 'package:sabka_bazar_flutter_app/src/screens/cart_screen.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isHideCartButton;
   final bool isShowCrossButton;
 
@@ -16,6 +16,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(56.0);
 
+  @override
+  _MyAppBarState createState() => _MyAppBarState();
+}
+
+class _MyAppBarState extends State<MyAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -33,9 +38,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   List<Widget> _getActionList(BuildContext context) {
-    if (isHideCartButton)
+    if (widget.isHideCartButton)
       return [];
-    else if (isShowCrossButton)
+    else if (widget.isShowCrossButton)
       return [
         IconButton(
           onPressed: () => Navigator.pop(context),
