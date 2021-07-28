@@ -189,8 +189,13 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 onPressed: () => {
                   cartBloc.clear.add("clear"),
+                  AppUtilClass.saveCartCount(0),
                   AppUtilClass.showSnackBar(
-                      context, 'Order is placed Successfully', 2)
+                    context,
+                    'Order is placed Successfully',
+                    2,
+                  ),
+                  Navigator.pop(context)
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -273,6 +278,8 @@ class _CartScreenState extends State<CartScreen> {
                                           onPressed: () => {
                                             cartBloc.substraction
                                                 .add(element.productId ?? ""),
+                                            if (cartList.length == 1)
+                                              AppUtilClass.saveCartCount(0),
                                             AppUtilClass.showSnackBar(context,
                                                 'Product Removed from cart', 2)
                                           },

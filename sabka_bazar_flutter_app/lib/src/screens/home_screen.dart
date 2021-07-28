@@ -186,8 +186,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _checkCartCount() {
-    setState(() {
-      AppUtilClass.getCartCount().then((value) => _cartCount = value);
+    AppUtilClass.getCartCount().then((value) {
+      setState(() {
+        _cartCount = value;
+      });
     });
   }
 }

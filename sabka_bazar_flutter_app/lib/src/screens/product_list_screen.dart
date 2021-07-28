@@ -154,8 +154,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   void _checkCartCount() {
-    setState(() {
-      AppUtilClass.getCartCount().then((value) => _cartCount = value);
+    AppUtilClass.getCartCount().then((value) {
+      setState(() {
+        _cartCount = value;
+      });
     });
   }
 }

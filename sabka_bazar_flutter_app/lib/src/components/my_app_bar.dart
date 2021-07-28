@@ -75,22 +75,12 @@ class _MyAppBarState extends State<MyAppBar> {
                     width: 30,
                   ),
                 ),
-                FutureBuilder(
-                  future: AppUtilClass.getCartCount(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Container();
-                    }
-                    return Text(
-                      AppUtilClass.getTextNoOfItemInCart(widget.cartCount == 0
-                          ? snapshot.data as int
-                          : widget.cartCount),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                      ),
-                    );
-                  },
+                Text(
+                  AppUtilClass.getTextNoOfItemInCart(widget.cartCount),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),
